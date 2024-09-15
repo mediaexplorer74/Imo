@@ -1,0 +1,156 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.GroupProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+    <local:ImoPage.Resources>
+        <converters:BooleanToObjectConverter x:Key="BoolToFavoriteColorConverter"
+            True="{StaticResource FavoriteBrush}" False="{StaticResource ForegroundLighterBrush}"/>
+
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" />
+        <converters:BuidToIdentIconFillConverter x:Key="BuidToIdentIconFillConverter" />
+        <converters:AliasToInitialsConverter x:Key="AliasToInitialsConverter"/>
+
+        <DataTemplate x:Key="ContactItemTemplate">
+            <Grid Background="Transparent" Margin="10 10 10 0" Tap="Member_Tap">
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                        <toolkit:MenuItem Header="Chat" Click="MemberChat_Click"/>
+                        <toolkit:MenuItem Header="Profile" Click="MemberProfile_Click"/>
+                        <toolkit:MenuItem Header="Remove" Click="MemberRemove_Click"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <local:ImoContactIcon Margin="0 0 10 0"
+                                      DataContext="{Binding }"
+                                      Height="70" Width="70"
+                                      ShowPrimitive="False" />
+
+                <TextBlock Grid.Column="1" Text="{Binding Alias}" FontSize="24"
+                           VerticalAlignment="Center">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+
+    </local:ImoPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="300" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{Binding Contact.Buid, Converter={StaticResource BuidToIdentIconFillConverter}}" Tap="Image_Tap">
+            <TextBlock Text="{Binding Contact.Alias, Converter={StaticResource AliasToInitialsConverter}}"
+                       FontSize="64"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+            <local:ImoImage Url="{Binding Contact.PhotoUrl}" Stretch="UniformToFill" EnableBusyIndicator="True"/>
+        </Grid>
+
+        <Grid Height="70" VerticalAlignment="Top">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#ee000000" Offset="0"/>
+                    <GradientStop Color="#99000000" Offset="0.3"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <local:IconButton IconName="DotsIcon"
+                          Height="64" Width="64"
+                          IconSize="36"
+                          x:Name="settingsButton"
+                          Click="Settings_Click"
+                          Foreground="White"
+                          HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 10 0">
+            <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                    <toolkit:MenuItem Header="Leave" Click="LeaveGroup_Click" />
+                    <toolkit:MenuItem Header="Mute"
+                                      Visibility="{Binding Contact.IsMuted, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                      Click="Mute_Click" />
+                    <toolkit:MenuItem Header="Unmute"
+                                      Visibility="{Binding Contact.IsMuted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                      Click="Unmute_Click" />
+                    <toolkit:MenuItem Header="Choose Photo" Click="ChangePhoto_Click" />
+                </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
+        </local:IconButton>
+
+        <Border x:Name="isUploadingIndicator"
+                Visibility="Collapsed"
+                CornerRadius="5" Background="Black" Padding="10 8"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Foreground="White" Text="Uploading..." />
+        </Border>
+
+        <Border Background="#88000000" VerticalAlignment="Bottom" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
+
+                    <local:IconCircleButton Height="50" Width="50"
+                                            HorizontalAlignment="Right" Tap="FavoriteButton_Tapped" IconName="StarIcon"
+                                            Background="White"
+                                            Foreground="{Binding Contact.IsFavorite, Converter={StaticResource BoolToFavoriteColorConverter}}" />
+                    <TextBlock Text="{Binding Contact.Alias}" FontSize="28"
+                               Margin="10 0 0 0"
+                               Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                </StackPanel>
+
+                <local:IconCircleButton Height="50" Width="50"
+                                        HorizontalAlignment="Right" Grid.Column="1"
+                                        Background="White"
+                                        Foreground="{StaticResource IconBrush}"
+                                        Tap="ViewGallery_Tapped" IconName="GalleryIcon" />
+
+                <local:IconCircleButton Height="50" Width="50"
+                                        Margin="10 0 0 0"
+                                        Background="White"
+                                        Foreground="{StaticResource IconBrush}"
+                                        HorizontalAlignment="Right" Grid.Column="2"
+                                        Tap="AddMembers_Tapped" IconName="UserAddIcon" />
+            </Grid>
+        </Border>
+        <imo:LongListSelector Grid.Row="1" x:Name="searchResultList" IsTabStop="True"
+                  HorizontalContentAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  ItemsSource="{Binding GroupMembers}"
+                  Background="Transparent"
+                  IsFlatList="True"
+                  ItemTemplate="{StaticResource ContactItemTemplate}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        </imo:LongListSelector>
+    </Grid>
+</local:ImoPage>

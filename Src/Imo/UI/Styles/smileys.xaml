@@ -1,0 +1,85 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:clr="clr-namespace:System;assembly=mscorlib">
+
+    <ControlTemplate x:Key="angry">
+        <views:Icon IconName="AngryEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="baffled">
+        <views:Icon IconName="BaffledEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="confused">
+        <views:Icon IconName="ConfusedEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="cool">
+        <views:Icon IconName="CoolEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="evil">
+        <views:Icon IconName="EvilEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="frustrated">
+        <views:Icon IconName="FrustratedEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="grin">
+        <views:Icon IconName="GrinEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="hipster">
+        <views:Icon IconName="HipsterEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="neutral">
+        <views:Icon IconName="NeutralEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="sad">
+        <views:Icon IconName="SadEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="shocked">
+        <views:Icon IconName="ShockedEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="smile" >
+        <views:Icon IconName="SmileyEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="tongue">
+        <views:Icon IconName="TongueEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="wink">
+        <views:Icon IconName="WinkEmoticonIcon" Foreground="{TemplateBinding Foreground}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="wondering">
+        <views:Icon IconName="WonderingEmoticonIcon" Foreground="{TemplateBinding Foreground}"/>
+    </ControlTemplate>
+
+    <ResourceDictionary x:Key="SmileyStrings">
+        <clr:String x:Key=":)" >smile</clr:String>
+        <clr:String x:Key=":D" >grin</clr:String>
+        <clr:String x:Key=":P" >tongue</clr:String>
+        <!--<system:String x:Key=":@" >angry</system:String>
+        <system:String x:Key=":S" >confused</system:String>
+        <system:String x:Key="8)" >cool</system:String>
+        <system:String x:Key=":}" >hipster</system:String>-->
+        <clr:String x:Key=":|" >neutral</clr:String>
+        <!--<system:String x:Key=":/" >wondering</system:String>
+        <system:String x:Key=":o" >shocked</system:String>
+        <system:String x:Key=":^)">baffled</system:String>-->
+        <clr:String x:Key=":(" >sad</clr:String>
+        <!--<system:String x:Key="]:)">evil</system:String>
+        <system:String x:Key=":*)">frustrated</system:String>-->
+        <clr:String x:Key=";)" >wink</clr:String>
+    </ResourceDictionary>
+
+</ResourceDictionary>

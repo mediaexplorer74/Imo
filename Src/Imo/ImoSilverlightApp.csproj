@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{7856522D-0AD3-461B-9CB2-3D1AEDF4144E}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Imo</RootNamespace>
+    <AssemblyName>Imo</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManager.cs" />
+    <Compile Include="AV\AVManager.cs" />
+    <Compile Include="AV\AVState.cs" />
+    <Compile Include="AV\CallController.cs" />
+    <Compile Include="AV\CameraGrabber.cs" />
+    <Compile Include="AV\GroupCallController.cs" />
+    <Compile Include="AV\MacawHandler.cs" />
+    <Compile Include="AV\NativeMessage.cs" />
+    <Compile Include="AV\SampleGrabberEventArgs.cs" />
+    <Compile Include="BaseManager.cs" />
+    <Compile Include="ChatHeadsViewModel.cs" />
+    <Compile Include="ChatHeadViewModel.cs" />
+    <Compile Include="Collections\Pair`2.cs" />
+    <Compile Include="Collections\PriorityQueue`1.cs" />
+    <Compile Include="Collections\SortedObservableCollection`1.cs" />
+    <Compile Include="Collections\TimestampedObject`1.cs" />
+    <Compile Include="Connection\ConnectionData.cs" />
+    <Compile Include="Connection\DispatcherImoDNSProvider.cs" />
+    <Compile Include="Connection\HttpImoDNSProvider.cs" />
+    <Compile Include="Connection\ImoDNSEndpoint.cs" />
+    <Compile Include="Connection\ImoDNSManager.cs" />
+    <Compile Include="Connection\ImoDNSProvider.cs" />
+    <Compile Include="Connection\IncommingMessagesLooper.cs" />
+    <Compile Include="Connection\Network.cs" />
+    <Compile Include="Connection\OutgoingMessageLooper.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="ContactsManager.cs" />
+    <Compile Include="Converters\AliasToInitialsConverter.cs" />
+    <Compile Include="Converters\BooleanConverterBase`1.cs" />
+    <Compile Include="Converters\BooleanToDoubleConverter.cs" />
+    <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
+    <Compile Include="Converters\BooleanToObjectConverter.cs" />
+    <Compile Include="Converters\BooleanToStringConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BuidToContactConverter.cs" />
+    <Compile Include="Converters\BuidToIdentIconFillConverter.cs" />
+    <Compile Include="Converters\CCToImageUriConverter.cs" />
+    <Compile Include="Converters\ContactListToStringConverter.cs" />
+    <Compile Include="Converters\DoubleToCornerRadiusConverter.cs" />
+    <Compile Include="Converters\DoubleToPointConverter.cs" />
+    <Compile Include="Converters\DoubleToThicknessConverter.cs" />
+    <Compile Include="Converters\EnumerableToVisibilityConverter.cs" />
+    <Compile Include="Converters\GroupCallBorderAngleConverter.cs" />
+    <Compile Include="Converters\GroupCallBorderHeightConverter.cs" />
+    <Compile Include="Converters\GroupCallBorderWidthConverter.cs" />
+    <Compile Include="Converters\GroupCallImageAngleConverter.cs" />
+    <Compile Include="Converters\GroupCallMarginConverter.cs" />
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertBoolConverter.cs" />
+    <Compile Include="Converters\LowercaseEnumConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
+    <Compile Include="Converters\PrimitiveToIconBrushConverter.cs" />
+    <Compile Include="Converters\PrimitiveToIconNameConverter.cs" />
+    <Compile Include="Converters\ProgressToAngleConverter.cs" />
+    <Compile Include="Converters\ReverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReversedNullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReverseIntToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReverseStringToVisibilityConverter.cs" />
+    <Compile Include="Converters\ScaleDoubleConverter.cs" />
+    <Compile Include="Converters\SpeakerButtonIconConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\SumDoubleConverter.cs" />
+    <Compile Include="Converters\VisibilityConverter.cs" />
+    <Compile Include="Dispatcher.cs" />
+    <Compile Include="EventArg`1.cs" />
+    <Compile Include="EventDispatcher.cs" />
+    <Compile Include="FileUploader.cs" />
+    <Compile Include="FileUploadError.cs" />
+    <Compile Include="Helpers\BitConverterHelper.cs" />
+    <Compile Include="Helpers\CountryCodeData.cs" />
+    <Compile Include="Helpers\CountryCodesHelper.cs" />
+    <Compile Include="Helpers\DataDeleteHelper.cs" />
+    <Compile Include="Helpers\DateTimeExtensions.cs" />
+    <Compile Include="Helpers\FSUtils.cs" />
+    <Compile Include="Helpers\IdentIconHelper.cs" />
+    <Compile Include="Helpers\ImageUtils.cs" />
+    <Compile Include="Helpers\ImoLogData.cs" />
+    <Compile Include="Helpers\ImoMessageBox.cs" />
+    <Compile Include="Helpers\ImoMessageBoxButton.cs" />
+    <Compile Include="Helpers\ImoMessageBoxResult.cs" />
+    <Compile Include="Helpers\ImoMessageBoxResultType.cs" />
+    <Compile Include="Helpers\ImoVersion.cs" />
+    <Compile Include="Helpers\PhoneLengthResult.cs" />
+    <Compile Include="Helpers\PictureSize.cs" />
+    <Compile Include="Helpers\RegularActionsUtils.cs" />
+    <Compile Include="Helpers\StickerResource.cs" />
+    <Compile Include="Helpers\StickerSize.cs" />
+    <Compile Include="Helpers\StickersUtils.cs" />
+    <Compile Include="Helpers\SystemInfoHelper.cs" />
+    <Compile Include="Helpers\UserAgentHelper.cs" />
+    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\VideoUtils.cs" />
+    <Compile Include="Helpers\VisualUtils.cs" />
+    <Compile Include="Helpers\ZLibHelper.cs" />
+    <Compile Include="ImageLoader.cs" />
+    <Compile Include="ImageLoaderCache.cs" />
+    <Compile Include="IMO.cs" />
+    <Compile Include="ImoAccount.cs" />
+    <Compile Include="ImoProfile.cs" />
+    <Compile Include="InviteType.cs" />
+    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="LoginResultData.cs" />
+    <Compile Include="Managers\ConversationsManager.cs" />
+    <Compile Include="Managers\ErrorReporter.cs" />
+    <Compile Include="Managers\FeedbackManager.cs" />
+    <Compile Include="Managers\HttpsDownloader.cs" />
+    <Compile Include="Managers\IM.cs" />
+    <Compile Include="Managers\MediaUploader.cs" />
+    <Compile Include="Managers\MonitorLog.cs" />
+    <Compile Include="Managers\NotificationsManager.cs" />
+    <Compile Include="Managers\PhonebookManager.cs" />
+    <Compile Include="Managers\PhotoStreamsManager.cs" />
+    <Compile Include="Managers\Pixel.cs" />
+    <Compile Include="Managers\PixelChunkState.cs" />
+    <Compile Include="Managers\PixelDownloader.cs" />
+    <Compile Include="Managers\PixelDownloadPriority.cs" />
+    <Compile Include="Managers\PixelObjectType.cs" />
+    <Compile Include="Managers\QueryEngine.cs" />
+    <Compile Include="Managers\StickersManager.cs" />
+    <Compile Include="Managers\StickersService.cs" />
+    <Compile Include="MessageFactory.cs" />
+    <Compile Include="NavigationManager.cs" />
+    <Compile Include="OutgoingMessage.cs" />
+    <Compile Include="Pages\SignInPageViewModel.cs" />
+    <Compile Include="PushNotificationsManager.cs" />
+    <Compile Include="Resources\AppResources.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RingBuffer`1.cs" />
+    <Compile Include="Selectors\DataTemplateSelector.cs" />
+    <Compile Include="Selectors\EnumTemplateSelector.cs" />
+    <Compile Include="Selectors\MessageTemplateSelector.cs" />
+    <Compile Include="Selectors\TypeBasedTemplateSelector.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="SignOnData.cs" />
+    <Compile Include="Storage\ApplicationProperties.cs" />
+    <Compile Include="Storage\ApplicationStorage.cs" />
+    <Compile Include="Storage\Models\ApplicationSettings.cs" />
+    <Compile Include="Storage\Models\AudioMessage.cs" />
+    <Compile Include="Storage\Models\Contact.cs" />
+    <Compile Include="Storage\Models\Conversation.cs" />
+    <Compile Include="Storage\Models\FileMessage.cs" />
+    <Compile Include="Storage\Models\Message.cs" />
+    <Compile Include="Storage\Models\MessageMergeState.cs" />
+    <Compile Include="Storage\Models\MessageOrigin.cs" />
+    <Compile Include="Storage\Models\MessageState.cs" />
+    <Compile Include="Storage\Models\MessageType.cs" />
+    <Compile Include="Storage\Models\ModelBase.cs" />
+    <Compile Include="Storage\Models\Photo.cs" />
+    <Compile Include="Storage\Models\PhotoMessage.cs" />
+    <Compile Include="Storage\Models\PhotoStream.cs" />
+    <Compile Include="Storage\Models\PhotoType.cs" />
+    <Compile Include="Storage\Models\Primitive.cs" />
+    <Compile Include="Storage\Models\Sticker.cs" />
+    <Compile Include="Storage\Models\StickerMessage.cs" />
+    <Compile Include="Storage\Models\StickerPack.cs" />
+    <Compile Include="Storage\Models\SystemMessage.cs" />
+    <Compile Include="Storage\Models\TextMessage.cs" />
+    <Compile Include="Storage\Models\UploadedPhoneContact.cs" />
+    <Compile Include="Storage\Models\User.cs" />
+    <Compile Include="Storage\Models\VideoMessage.cs" />
+    <Compile Include="Storage\PersistentStorage.cs" />
+    <Compile Include="Sym.cs" />
+    <Compile Include="TyperViewModel.cs" />
+    <Compile Include="UI\Views\AddToContactsItem.cs" />
+    <Compile Include="UI\Views\Arc.cs" />
+    <Compile Include="UI\Views\AVCallPage.cs" />
+    <Compile Include="UI\Views\AVCallPageViewModel.cs" />
+    <Compile Include="UI\Views\BlockedContactsPage.cs" />
+    <Compile Include="UI\Views\BlockedContactsPageViewModel.cs" />
+    <Compile Include="UI\Views\BuddyProfilePage.cs" />
+    <Compile Include="UI\Views\BusyIndicator.cs" />
+    <Compile Include="UI\Views\ChatHeadsView.cs" />
+    <Compile Include="UI\Views\ChatLog.cs" />
+    <Compile Include="UI\Views\ChatLogViewModel.cs" />
+    <Compile Include="UI\Views\ChatsList.cs" />
+    <Compile Include="UI\Views\ChatsListChatItem.cs" />
+    <Compile Include="UI\Views\ChatsListGroupCallItem.cs" />
+    <Compile Include="UI\Views\ChatsListGroupChatItem.cs" />
+    <Compile Include="UI\Views\ChatsListInviteItem.cs" />
+    <Compile Include="UI\Views\ChatsListItemBase.cs" />
+    <Compile Include="UI\Views\ChatsListViewModel.cs" />
+    <Compile Include="UI\Views\CodeInputPage.cs" />
+    <Compile Include="UI\Views\CodeInputPageReason.cs" />
+    <Compile Include="UI\Views\CodeInputPageViewModel.cs" />
+    <Compile Include="UI\Views\ContactListProperties.cs" />
+    <Compile Include="UI\Views\ContactSelectorView.cs" />
+    <Compile Include="UI\Views\ContactSelectorViewModel.cs" />
+    <Compile Include="UI\Views\ContactsList.cs" />
+    <Compile Include="UI\Views\ContactsListContactItem.cs" />
+    <Compile Include="UI\Views\ContactsListCreateGroupItem.cs" />
+    <Compile Include="UI\Views\ContactsListGroupContactItem.cs" />
+    <Compile Include="UI\Views\ContactsListInviteItem.cs" />
+    <Compile Include="UI\Views\ContactsListItemBase.cs" />
+    <Compile Include="UI\Views\ContactsListViewModel.cs" />
+    <Compile Include="UI\Views\ConversationPage.cs" />
+    <Compile Include="UI\Views\ConversationPageViewModel.cs" />
+    <Compile Include="UI\Views\CreateGroupPage.cs" />
+    <Compile Include="UI\Views\CreateGroupViewModel.cs" />
+    <Compile Include="UI\Views\DeleteAccountPage.cs" />
+    <Compile Include="UI\Views\DispatcherPage.cs" />
+    <Compile Include="UI\Views\DispatcherViewModel.cs" />
+    <Compile Include="UI\Views\DownloadAccountPage.cs" />
+    <Compile Include="UI\Views\DrawingCanvas.cs" />
+    <Compile Include="UI\Views\DrawingCanvasViewModel.cs" />
+    <Compile Include="UI\Views\GalleryPage.cs" />
+    <Compile Include="UI\Views\GalleryPageViewModel.cs" />
+    <Compile Include="UI\Views\GalleryRowViewModel.cs" />
+    <Compile Include="UI\Views\GDPRAcceptPage.cs" />
+    <Compile Include="UI\Views\GroupProfilePage.cs" />
+    <Compile Include="UI\Views\GroupProfilePageViewModel.cs" />
+    <Compile Include="UI\Views\HomePage.cs" />
+    <Compile Include="UI\Views\HomePageViewModel.cs" />
+    <Compile Include="UI\Views\Icon.cs" />
+    <Compile Include="UI\Views\IconButton.cs" />
+    <Compile Include="UI\Views\IconCircle.cs" />
+    <Compile Include="UI\Views\IconCircleButton.cs" />
+    <Compile Include="UI\Views\IconCircleStrokedButton.cs" />
+    <Compile Include="UI\Views\ImageViewerControl.cs" />
+    <Compile Include="UI\Views\ImageViewerPage.cs" />
+    <Compile Include="UI\Views\ImoAudioAmpsElement.cs" />
+    <Compile Include="UI\Views\ImoAudioInline.cs" />
+    <Compile Include="UI\Views\ImoContactIcon.cs" />
+    <Compile Include="UI\Views\ImoImage.cs" />
+    <Compile Include="UI\Views\ImoPage.cs" />
+    <Compile Include="UI\Views\ImoSelfIcon.cs" />
+    <Compile Include="UI\Views\ImoStickerImage.cs" />
+    <Compile Include="UI\Views\ImoTextBox.cs" />
+    <Compile Include="UI\Views\ImoVideoInline.cs" />
+    <Compile Include="UI\Views\InvitePage.cs" />
+    <Compile Include="UI\Views\InvitePageViewModel.cs" />
+    <Compile Include="UI\Views\InvitePeopleToGroupPage.cs" />
+    <Compile Include="UI\Views\InvitePeopleToGroupPageViewModel.cs" />
+    <Compile Include="UI\Views\MessageState.cs" />
+    <Compile Include="UI\Views\MessageTemplates\BuddyAudioMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\BuddyPhotoMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\BuddyStickerMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\BuddyVideoMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MeAudioMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MePhotoMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MessageBuddyControl.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MessageMeControl.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MessageSystem.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MessageTextBlock.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MeStickerMessage.cs" />
+    <Compile Include="UI\Views\MessageTemplates\MeVideoMessage.cs" />
+    <Compile Include="UI\Views\PhotoStreamViewerPage.cs" />
+    <Compile Include="UI\Views\PhotoStreamViewerPageViewModel.cs" />
+    <Compile Include="UI\Views\RegisterPage.cs" />
+    <Compile Include="UI\Views\RegisterPageViewModel.cs" />
+    <Compile Include="UI\Views\SearchContactsPage.cs" />
+    <Compile Include="UI\Views\SearchContactsPageViewModel.cs" />
+    <Compile Include="UI\Views\SearchDirectoryItem.cs" />
+    <Compile Include="UI\Views\SearchListContact.cs" />
+    <Compile Include="UI\Views\SearchListItemBase.cs" />
+    <Compile Include="UI\Views\SearchListPhonebookContact.cs" />
+    <Compile Include="UI\Views\SelectorContactItem.cs" />
+    <Compile Include="UI\Views\SelectorItemBase.cs" />
+    <Compile Include="UI\Views\SelectorPhonebookContactItem.cs" />
+    <Compile Include="UI\Views\SettingsPage.cs" />
+    <Compile Include="UI\Views\SettingsPageViewModel.cs" />
+    <Compile Include="UI\Views\ShareToMembersPage.cs" />
+    <Compile Include="UI\Views\ShareToMembersPageViewModel.cs" />
+    <Compile Include="UI\Views\SignInPage.cs" />
+    <Compile Include="UI\Views\StickerItemViewModel.cs" />
+    <Compile Include="UI\Views\StickerPackViewModel.cs" />
+    <Compile Include="UI\Views\StickersPickerView.cs" />
+    <Compile Include="UI\Views\StickersPickerViewModel.cs" />
+    <Compile Include="UI\Views\VideoCapturePage.cs" />
+    <Compile Include="UI\Views\VideoPlayerPage.cs" />
+    <Compile Include="VideoLoader.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="Imo\Phone\Controls\FlipView.cs" />
+    <Compile Include="Imo\Phone\Controls\FlipViewItem.cs" />
+    <Compile Include="Imo\Phone\Controls\GroupViewClosingEventArgs.cs" />
+    <Compile Include="Imo\Phone\Controls\GroupViewOpenedEventArgs.cs" />
+    <Compile Include="Imo\Phone\Controls\InternalUtils.cs" />
+    <Compile Include="Imo\Phone\Controls\LinkUnlinkEventArgs.cs" />
+    <Compile Include="Imo\Phone\Controls\LongListSelector.cs" />
+    <Compile Include="Imo\Phone\Controls\LongListSelectorItem.cs" />
+    <Compile Include="Imo\Phone\Controls\LongListSelectorItemType.cs" />
+    <Compile Include="Imo\Phone\Controls\MotionParameters.cs" />
+    <Compile Include="Imo\Phone\Controls\PhysicsConstants.cs" />
+    <Compile Include="Imo\Phone\Controls\Primitives\TemplatedListBox.cs" />
+    <Compile Include="Imo\Phone\Controls\Primitives\TemplatedListBoxItem.cs" />
+    <Compile Include="Imo\Phone\Controls\SafeRaise.cs" />
+    <Compile Include="Imo\Phone\Controls\UpdateSelectionMode.cs" />
+    <Compile Include="Imo\Phone\Controls\VisualStates.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NLog\Logger.cs" />
+    <Compile Include="NLog\LogManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Windows\Controls\TemplatedVisualTreeExtensions.cs" />
+    <Compile Include="System\Windows\Controls\VisualTreeExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\busyindicatormask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Styles\brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Styles\iconpaths.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Styles\resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Styles\smileys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\arc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\avcallpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\blockedcontactspage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\buddyprofilepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\busyindicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\chatheadsview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\chatlog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\chatslist.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\codeinputpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\contactselectorview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\contactslist.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\conversationpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\creategrouppage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\deleteaccountpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\dispatcherpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\downloadaccountpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\drawingcanvas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\gallerypage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\gdpracceptpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\groupprofilepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\homepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\iconbutton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\iconcircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\iconcirclebutton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\iconcirclestrokedbutton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imageviewercontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imageviewerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imoaudioinline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imocontacticon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imoimage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imoselficon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imostickerimage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imotextbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\imovideoinline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\invitepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\invitepeopletogrouppage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\messagestate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\buddyaudiomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\buddyphotomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\buddystickermessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\buddyvideomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\meaudiomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\mephotomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\messagebuddycontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\messagemecontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\messagesystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\mestickermessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\MessageTemplates\mevideomessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\photostreamviewerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\registerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\searchcontactspage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\settingspage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\sharetomemberspage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\signinpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\stickerspickerview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\videocapturepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\videoplayerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.14</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <DependentUpon>AppResources.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coding4Fun.Toolkit.Controls\Coding4Fun.Toolkit.Controls.csproj">
+      <Project>{c087e02f-7c4e-4423-a176-d125ae8f696a}</Project>
+      <Name>Coding4Fun.Toolkit.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImoSilverlightApp.Agents\ImoSilverlightApp.Agents.csproj">
+      <Project>{c17998b5-c225-4e1f-a5f9-1272cec8a1b5}</Project>
+      <Name>ImoSilverlightApp.Agents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ionic.ZLib\Ionic.ZLib.csproj">
+      <Project>{70397dd8-b95e-4491-84ad-66a2e2c6f8f1}</Project>
+      <Name>Ionic.ZLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MacawRT\MacawRT.csproj">
+      <Project>{63043c23-2506-4fd5-90c1-20f23d6f0ee6}</Project>
+      <Name>MacawRT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

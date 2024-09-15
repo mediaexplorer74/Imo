@@ -1,0 +1,176 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ContactSelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+             xmlns:imo="clr-namespace:Imo.Phone.Controls"
+             xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+             xmlns:selectors="clr-namespace:ImoSilverlightApp.Selectors"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:InvertBoolConverter x:Key="invertBoolConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToObjectConverter x:Key="GroupToColorConverter"
+                                             True="{StaticResource GroupForegroundColor}"
+                                             False="{StaticResource ChatForegroundColor}"/>
+        <!--<MenuFlyout x:Key="PersonContextMenu">
+            <MenuFlyoutItem Text="Remove" Click="RemoveSelected_Click"/>
+        </MenuFlyout>-->
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="ADD: " Margin="0 0 0 10"
+                   VerticalAlignment="Center" Foreground="{StaticResource ForegroundLighterBrush}" FontWeight="Normal"/>
+        <Border Grid.Column="1" BorderBrush="{StaticResource MainPageBordersBrush}" BorderThickness="0" Margin="5">
+            <StackPanel Orientation="Vertical">
+                <ScrollViewer x:Name="scrollViewer" MaxHeight="100" IsTabStop="True"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding SelectedItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel SizeChanged="scrollViewer_SizeChanged"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <selectors:TypeBasedTemplateSelector Content="{Binding}" >
+                                    <selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="2 2 4 2" Padding="0 0 8 0" CornerRadius="16"
+                                                    Background="{StaticResource ListItemSelectedBrush}">
+                                                <toolkit:ContextMenuService.ContextMenu>
+                                                    <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                                                        <toolkit:MenuItem Header="Remove" Click="Remove_Click" />
+                                                    </toolkit:ContextMenu>
+                                                </toolkit:ContextMenuService.ContextMenu>
+                                                <StackPanel Orientation="Horizontal" Background="Transparent">
+                                                    <local:ImoContactIcon DataContext="{Binding Contact}" Height="32" Width="32" />
+                                                    <TextBlock Text="{Binding Contact.Alias}" Margin="4 0 0 2" FontSize="18" VerticalAlignment="Center"
+                                                               Foreground="{Binding Contact.IsGroup, Converter={StaticResource GroupToColorConverter}}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </selectors:TypeBasedTemplateSelector.DefaultTemplate>
+
+                                    <DataTemplate x:Key="SelectorPhonebookContactItem">
+                                        <Border Margin="2" Padding="8" CornerRadius="16"
+                                                Background="{StaticResource ListItemSelectedBrush}">
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                                                    <toolkit:MenuItem Header="Remove" Click="Remove_Click"/>
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                                <TextBlock Text="{Binding Name}" Margin="4 0 0 2" FontSize="18" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource ChatForegroundColor}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </selectors:TypeBasedTemplateSelector>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <local:ImoTextBox Margin="10 5 0 0" PlaceholderText="Search Contacts" x:Name="searchTextBox" KeyDown="SearchTextBox_KeyDown" Text="{Binding SearchText, Mode=TwoWay}" />
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="No results found" HorizontalAlignment="Center" Margin="0 10 0 0"
+                   FontStyle="Italic" Foreground="{StaticResource ForegroundLighterBrush}"
+                   Visibility="{Binding ShowNoResultsMessage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="{StaticResource MainPageBordersBrush}" BorderThickness="0" Margin="5">
+            <Grid Background="Transparent">
+                <imo:LongListSelector HorizontalContentAlignment="Stretch"
+                                      VerticalAlignment="Top"
+                                      x:Name="searchResultList"
+                                      ItemsSource="{Binding SearchResults}"
+                                      IsFlatList="True"
+                                      Background="Transparent"
+                                      ManipulationStarted="scrollViewer_ManipulationStarted"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <imo:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <selectors:TypeBasedTemplateSelector Content="{Binding}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                <selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                                    <DataTemplate>
+                                        <Grid Tap="ContactItem_MouseDown" Background="Transparent">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <local:ImoContactIcon Margin="5 4"
+                                                                  DataContext="{Binding Contact}"
+                                                                  Height="70" Width="70"
+                                                                  ShowPrimitive="False" />
+
+                                            <TextBlock Grid.Column="1"
+                                                       Margin="5 0 0 0"
+                                                       Text="{Binding Contact.Alias}" FontSize="24"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="{Binding Contact.IsGroup, Converter={StaticResource GroupToColorConverter}}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                                <DataTemplate x:Key="SelectorPhonebookContactItem">
+                                    <Grid Tap="PhonebookContactItem_MouseDown" Background="Transparent"
+                                          Margin="0 0 0 20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Text="{Binding Name}" FontSize="24"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource ChatForegroundColor}"/>
+
+                                        <TextBlock Grid.Row="1"
+                                                   Opacity="0.7"
+                                                   Text="{Binding PhoneNumber}" FontSize="20"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource ForegroundLightBrush}"/>
+
+                                        <Border Grid.Column="1" Grid.RowSpan="2"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20"
+                                                Background="#0091EA">
+                                            <TextBlock Text="ADD" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                       Foreground="White"
+                                                       Margin="25 10"
+                                                       FontSize="20"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </selectors:TypeBasedTemplateSelector>
+                        </DataTemplate>
+                    </imo:LongListSelector.ItemTemplate>
+                </imo:LongListSelector>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2"
+              Visibility="{Binding ShowBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:BusyIndicator />
+        </Grid>
+    </Grid>
+</UserControl>

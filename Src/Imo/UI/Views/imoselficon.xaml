@@ -1,0 +1,35 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ImoSelfIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+             xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+             mc:Ignorable="d"
+             x:Name="selfIconRoot"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:DoubleToPointConverter x:Key="doubleToPointConverter" Scale="0.5" />
+        <converters:ScaleDoubleConverter x:Key="scaleDoubleConverter" Scale="0.5" />
+        <converters:ScaleDoubleConverter x:Key="fontSizeConverter" Scale="0.5" MinValue="1" />
+        <converters:BuidToIdentIconFillConverter x:Key="buidToIdentIconFillConverter"/>
+        <converters:AliasToInitialsConverter x:Key="AliasToInitialsConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Ellipse Fill="{Binding User.Uid, Converter={StaticResource buidToIdentIconFillConverter}}" />
+
+        <TextBlock Text="{Binding User.Alias, Converter={StaticResource AliasToInitialsConverter}}"
+                   FontSize="{Binding ActualHeight, ElementName=selfIconRoot, Converter={StaticResource fontSizeConverter}}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+        <Ellipse x:Name="ellipse">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="ellipseBrush"></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Grid>
+</UserControl>

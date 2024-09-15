@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C087E02F-7C4E-4423-A176-D125AE8F696A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Coding4Fun.Toolkit.Controls</RootNamespace>
+    <AssemblyName>Coding4Fun.Toolkit.Controls</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Clarity\Phone\Extensions\DialogService.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\AboutPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\AboutPromptItem.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ActionPopUp`2.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\AppBarPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\AppBarPromptAction.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\AppBarPromptItem.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Binding\FrameworkElementBinding.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Binding\PreventScrollBinding.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Binding\TextBinding.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ButtonBase.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ButtonBaseConstants.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ButtonBaseHelper.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ChatBubble.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ChatBubbleDirection.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ChatBubbleTextBox.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ColorBaseControl.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ColorHexagonPicker.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ColorPicker.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ColorSlider.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ColorSliderThumb.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\ApplicationSpace.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\ColorExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\ColorSpace.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\ControlHelper.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\DoubleExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\FloatExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\HSV.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\IImageSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\IImageSourceFull.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\ImageSourceExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\IntExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\PhoneHelper.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\SafeDispatcher.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\TimeSpanExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Common\TimeSpanFormat.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\NumberMultiplierConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\SolidColorBrushToColorConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ThemedImageConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ThemedImageConverterHelper.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ThemedInverseImageConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ThicknessProperties.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ThicknessToGridLengthConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\ValueConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Converters\VisibilityToBooleanConverter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\DataSource`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\DevelopmentHelpers.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\HourTimeSpanDataSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\IAppBarButton.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\IButtonBase.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ImageTile.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ImageTileAnimationTypes.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ImageTileLayoutStates.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ImageTileState.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\InputPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\LockScreenPreview.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MemoryCounter.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MessagePrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MetroFlow.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MetroFlowData.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MetroFlowItem.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MinuteTimeSpanDataSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MotionParameters.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MovementMonitor.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\MovementMonitorEventArgs.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Numbers.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\OpacityToggleButton.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\PasswordInputPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\PhysicsConstants.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\PopUpEventArgs`2.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\PopUpResult.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\PopUp`2.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\ILoopingSelectorDataSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\ITimeSpanPickerPage`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\IValuePickerPage`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\LoopingSelector.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\LoopingSelectorItem.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\TimeSpanPickerBasePage.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\TimeSpanWrapper.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\ValuePickerBasePage`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Primitives\ValueWrapper`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ProgressOverlay.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Properties\Resources.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Coding4Fun\Toolkit\Controls\PropertyChangedEventArgs`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\RectangularButton.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\RoundButton.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\RoundToggleButton.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SafeRaise.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SecondTimeSpanDataSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SelectionTapEventArgs.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SuperImage.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SuperImageSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\SuperSlider.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TemplatedVisualTreeExtensions.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\Tile.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TileNotification.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TiltEffect.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TimeSpanDataSource.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TimeSpanPicker.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TimeSpanPickerPage.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\TimeSpanValueChangedEventArgs.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ToastPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ToggleButtonBase.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\UserPrompt.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ValueChangedEventArgs`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ValuePickerBase`1.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\ValuePickerResources.cs" />
+    <Compile Include="Coding4Fun\Toolkit\Controls\VisualTreeExtensions.cs" />
+    <Compile Include="Microsoft\Phone\Controls\ITransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\NavigationInTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\NavigationOutTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\NavigationTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\RollTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\RotateTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\RotateTransitionMode.cs" />
+    <Compile Include="Microsoft\Phone\Controls\SlideTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\SlideTransitionMode.cs" />
+    <Compile Include="Microsoft\Phone\Controls\SwivelTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\SwivelTransitionMode.cs" />
+    <Compile Include="Microsoft\Phone\Controls\Transition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\TransitionElement.cs" />
+    <Compile Include="Microsoft\Phone\Controls\TransitionFrame.cs" />
+    <Compile Include="Microsoft\Phone\Controls\Transitions.cs" />
+    <Compile Include="Microsoft\Phone\Controls\TransitionService.cs" />
+    <Compile Include="Microsoft\Phone\Controls\TurnstileTransition.cs" />
+    <Compile Include="Microsoft\Phone\Controls\TurnstileTransitionMode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Coding4Fun\Toolkit\Controls\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <DependentUpon>Resources.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Coding4Fun.Toolkit.Controls.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.14</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\timespanpicker\timespanpickerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\roll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotatein180clockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotatein180counterclockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotatein90clockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotatein90counterclockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotateout180clockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotateout180counterclockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotateout90clockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\rotateout90counterclockwise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slidedownfadein.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slidedownfadeout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slideleftfadein.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slideleftfadeout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\sliderightfadein.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\sliderightfadeout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slideupfadein.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\slideupfadeout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelbackwardin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelbackwardout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelforwardin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelforwardout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelfullscreenin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\swivelfullscreenout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\turnstilebackwardin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\turnstilebackwardout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\turnstileforwardin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="valuepicker\transitions\transitions\storyboards\turnstileforwardout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coding4Fun.Toolkit\Coding4Fun.Toolkit.csproj">
+      <Project>{f60b31d3-1359-4776-8797-3e4149bb56cc}</Project>
+      <Name>Coding4Fun.Toolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

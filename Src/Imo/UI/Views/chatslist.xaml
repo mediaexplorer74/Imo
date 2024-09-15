@@ -1,0 +1,203 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ChatsList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:sel="clr-namespace:ImoSilverlightApp.Selectors"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="intToVisibilityConverter" />
+        <converters:InvertBoolConverter x:Key="invertBoolConverter" />
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter"/>
+        <converters:BooleanToDoubleConverter x:Key="MutedOpacityConverter" True="0.6" False="1"/>
+        <SolidColorBrush x:Key="GroupForegroundColor" Color="#D46363"/>
+        <SolidColorBrush x:Key="ChatForegroundColor" Color="#222"/>
+        <converters:BooleanToObjectConverter x:Key="GroupToColorConverter" True="{StaticResource GroupForegroundColor}" False="{StaticResource ChatForegroundColor}"/>
+        <converters:BuidToIdentIconFillConverter x:Key="buidToIdentIconFillConverter"/>
+        <converters:AliasToInitialsConverter x:Key="AliasToInitialsConverter"/>
+        <converters:ContactListToStringConverter x:Key="ContactListToStringConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="Transparent">
+        <imo:LongListSelector x:Name="chatsList"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalAlignment="Top"
+                              ItemsSource="{Binding ChatItems}"
+                              IsFlatList="True"
+                              Background="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <imo:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <sel:TypeBasedTemplateSelector Content="{Binding}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <sel:TypeBasedTemplateSelector.DefaultTemplate>
+                            <DataTemplate>
+                                <Grid Tap="Conversation_Tapped" Background="White" toolkit:TiltEffect.IsTiltEnabled="True">
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                                            <!--<toolkit:MenuItem Header="Send Message" Click="SendMessage_Click"/>
+
+                                            <toolkit:MenuItem Header="Audio Call" Click="AudioCall_Click"/>
+
+                                            <toolkit:MenuItem Header="Video Call" Click="VideoCall_Click"/>-->
+
+                                            <!--<toolkit:MenuItem Header="Add to Favorites" Click="AddToFavorites_Click"
+                                                              Visibility="{Binding Conversation.Contact.IsFavorite,
+                                                                Converter={StaticResource ReverseBooleanToVisibilityConverter}}"/>
+
+                                            <toolkit:MenuItem Header="Remove from Favorites" Click="RemoveFromFavorites_Click"
+                                                              Visibility="{Binding Conversation.Contact.IsFavorite,
+                                                                Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
+
+                                            <!--<toolkit:MenuItem Header="Audio Call" Click="AudioCall_Click"/>-->
+
+                                            <toolkit:MenuItem Header="Profile" Click="Profile_Click" />
+                                            <toolkit:MenuItem Header="Close Chat" Click="HideConversation_Click" />
+                                            <toolkit:MenuItem Header="Delete Chat" Click="DeleteConversation_Click" />
+
+                                            <!--<toolkit:MenuItem Header="Remove from Contacts" Click="RemoveContact_Click"
+                                                              Visibility="{Binding Conversation.Contact.IsBuddy,
+                                                                Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+
+                                            <!--<toolkit:MenuItem Header="Add to Contacts" Click="AddContact_Click"
+                                                              Visibility="{Binding Conversation.Contact.IsBuddy,
+                                                                Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
+
+                                            <toolkit:MenuItem Header="Block" Click="BlockContact_Click"
+                                                              Visibility="{Binding Conversation.Contact.IsBuddy,
+                                                                Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />-->
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Margin="10 8" Height="70" Width="70" Opacity="{Binding Conversation.Contact.IsMuted, Converter={StaticResource MutedOpacityConverter}}">
+                                        <Ellipse Fill="{Binding Conversation.Contact.Buid, Converter={StaticResource buidToIdentIconFillConverter}}" />
+
+                                        <TextBlock Text="{Binding Conversation.Contact.Alias, Converter={StaticResource AliasToInitialsConverter}}"
+                                           FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                                        <Ellipse local:ContactListProperties.ContactPicUrl="{Binding Conversation.Contact.IconUrl}">
+                                            <Ellipse.Fill>
+                                                <ImageBrush></ImageBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <Image Width="24" Height="24" 
+                                            Visibility="{Binding Conversation.Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                            local:ContactListProperties.Primitive="{Binding Conversation.Contact.Primitive}"
+                                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 1 1"/>
+                                    </Grid>
+                                    
+                                    <TextBlock Grid.Column="1" FontSize="24" Text="{Binding Conversation.Contact.Alias}"
+                                               Foreground="{Binding Conversation.Contact.IsGroup, Converter={StaticResource GroupToColorConverter}}"
+                                               Opacity="{Binding Conversation.Contact.IsMuted, Converter={StaticResource MutedOpacityConverter}}"
+                                               FontWeight="{Binding Conversation.HasUnreadMessages, Converter={StaticResource BooleanToFontWeightConverter}}"
+                                               VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Column="2" Text="{Binding LastMessageTimestamp}"
+                                               Foreground="{StaticResource ForegroundLighterBrush}"
+                                               VerticalAlignment="Center" Margin="10 0" FontSize="15"/>
+
+                                    <Border Grid.Column="3" Background="#ff9933"
+                                            Margin="0 0 16 0"
+                                            Height="24" Width="24"
+                                            Visibility="{Binding Conversation.HasUnreadMessages, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            HorizontalAlignment="Right"
+                                            CornerRadius="12">
+                                        <TextBlock Foreground="White" HorizontalAlignment="Center"
+                                            Text="{Binding UnreadMessagesCountUI}" FontSize="12" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <Image Grid.Column="4" Width="24" Height="24" Margin="0 0 16 0"
+                                        Visibility="{Binding Conversation.Contact.IsMuted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Source="/Assets/Icons/notifications_off.png"
+                                        HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    
+                                    <Image Source="/Assets/Icons/video_call_chat.png" 
+                                          Grid.Column="4"
+                                          Width="32" Height="32"
+                                          Margin="16 0"
+                                          Visibility="{Binding Conversation.Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                          Tap="VideoCall_Click"></Image>
+                                </Grid>
+                            </DataTemplate>
+                        </sel:TypeBasedTemplateSelector.DefaultTemplate>
+ 
+                        <DataTemplate x:Key="ChatsListInviteItem">
+                            <Grid Background="Transparent" Tap="Invite_Tapped" Loaded="Invite_Loaded" toolkit:TiltEffect.IsTiltEnabled="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <local:IconCircle Margin="10 8" Height="70" Width="70" IconName="InviteIcon" Background="{StaticResource InviteBrush}" />
+
+                                <TextBlock Grid.Column="1" FontSize="24" Text="Invite Friends"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource InviteBrush}" />
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="ChatsListGroupCallItem">
+                            <Grid Tap="JoinGroupCall_Tapped" Background="{StaticResource BackgroundCyanBrush}" toolkit:TiltEffect.IsTiltEnabled="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Margin="10 8" Height="70" Width="70">
+                                    <Ellipse Fill="{Binding Contact.Buid, Converter={StaticResource buidToIdentIconFillConverter}}" />
+
+                                    <TextBlock Text="{Binding Contact.Alias, Converter={StaticResource AliasToInitialsConverter}}"
+                                           FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                                    <Ellipse local:ContactListProperties.ContactPicUrl="{Binding Contact.IconUrl}">
+                                        <Ellipse.Fill>
+                                            <ImageBrush></ImageBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+
+                                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="{Binding Contact.Alias, StringFormat='{}{0}: '}"
+                                                   Foreground="{StaticResource ForegroundWhiteBrush}" />
+                                        <TextBlock FontSize="24" Text="{Binding Contact.GroupCallMembers, Converter={StaticResource ContactListToStringConverter}}"
+                                                   Foreground="{StaticResource ForegroundWhiteBrush}" />
+                                    </StackPanel>
+                                    <TextBlock FontSize="20"
+                                               Foreground="{StaticResource ForegroundWhiteBrush}"
+                                               Text="in group call. Tap to join!" />
+                                </StackPanel>
+
+                                <Image Source="/Assets/Icons/video_call_chat.png" 
+                                          Grid.Column="2"
+                                          Width="32" Height="32"
+                                          Margin="16 0"
+                                          Tap="VideoCall_Click"></Image>
+                            </Grid>
+                        </DataTemplate>
+                    </sel:TypeBasedTemplateSelector>
+                </DataTemplate>
+            </imo:LongListSelector.ItemTemplate>
+        </imo:LongListSelector>
+    </Grid>
+</UserControl>

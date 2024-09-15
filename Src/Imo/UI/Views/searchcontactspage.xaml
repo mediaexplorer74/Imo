@@ -1,0 +1,169 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.SearchContactsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:selectors="clr-namespace:ImoSilverlightApp.Selectors"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="White"
+    shell:SystemTray.ForegroundColor="Black">
+
+    <local:ImoPage.Resources>
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" />
+        <converters:InvertBoolConverter x:Key="invertBoolConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <SolidColorBrush x:Key="GroupForegroundColor" Color="#D46363"/>
+        <SolidColorBrush x:Key="ChatForegroundColor" Color="#222"/>
+        <converters:BooleanToObjectConverter x:Key="GroupToColorConverter" True="{StaticResource GroupForegroundColor}" False="{StaticResource ChatForegroundColor}"/>
+    </local:ImoPage.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <local:Icon IconName="SearchIcon"
+                        Height="20" Width="20" Foreground="Black" VerticalAlignment="Center" />
+
+            <local:ImoTextBox PlaceholderText="Search contacts..." Text="{Binding SearchText, Mode=TwoWay}"
+                              x:Name="searchTextBox"
+                              Grid.Column="1" Margin="15 0 0 0" VerticalAlignment="Center" />
+        </Grid>
+
+        <imo:LongListSelector x:Name="searchList"
+                              Grid.Row="1"
+                              Margin="0 20 0 0"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalAlignment="Top"
+                              ItemsSource="{Binding SearchResults}"
+                              IsFlatList="True"
+                              Background="Transparent"
+                              MouseEnter="searchList_MouseEnter"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <imo:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <selectors:TypeBasedTemplateSelector Content="{Binding}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                            <DataTemplate>
+                                <Grid Tap="SearchResult_Tapped" Background="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <local:ImoContactIcon Margin="10 8"
+                                              Height="70" Width="70"
+                                              DataContext="{Binding Contact}"
+                                              ShowPrimitive="{Binding IsGroup, Converter={StaticResource invertBoolConverter}}" />
+
+                                    <TextBlock Grid.Column="1" FontSize="24"
+                                               Foreground="{Binding Contact.IsGroup, Converter={StaticResource GroupToColorConverter}}"
+                                               Text="{Binding Contact.Alias}" VerticalAlignment="Center" />
+
+                                    <local:Icon Grid.Column="2"  VerticalAlignment="Center"
+                                                IconName="StarIcon" Margin="0 0 16 0"
+                                                Height="24" Width="24" Foreground="#FFD200"
+                                                Visibility="{Binding Contact.IsFavorite, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                                    <local:Icon Grid.Column="3" Width="24" Height="24" Margin="0 0 16 0"
+                                                Visibility="{Binding Contact.IsMuted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                Foreground="#999" Opacity="0.7"
+                                                IconName="NotificationsOffIcon"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                                    <local:Icon Tap="VideoCall_Click" VerticalAlignment="Center"
+                                                Grid.Column="3" Height="24" Width="24" Margin="0 0 16 0"
+                                                Visibility="{Binding Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                                Foreground="#0091EA"
+                                                IconName="VideoCallIcon"/>
+                                </Grid>
+                            </DataTemplate>
+                        </selectors:TypeBasedTemplateSelector.DefaultTemplate>
+
+                        <DataTemplate x:Key="AddToContactsItem">
+                            <Grid Tap="AddToContacts_Click">
+                                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20"
+                                        Background="#0091EA">
+                                    <TextBlock Text="ADD TO CONTACTS" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               Foreground="White"
+                                               Margin="25 10"
+                                               FontSize="20"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="SearchDirectoryItem">
+                            <Grid Tap="SearchDirectory_Click">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <local:IconCircle Margin="10 8" Height="70" Width="70" IconName="SearchIcon" Background="{StaticResource InviteBrush}" />
+
+                                <TextBlock Grid.Column="1" FontSize="24" Text="Search Directory"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource InviteBrush}" />
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="SearchListPhonebookContact">
+                            <Grid Tap="SearchPhonebookContact_Click" Height="86" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Margin="20 0 0 0" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Name}" FontSize="24" />
+
+                                    <TextBlock Grid.Row="1" FontSize="22"
+                                               Text="{Binding PhoneNumber}"
+                                               VerticalAlignment="Center"
+                                               Margin="0 5 0 0"
+                                               Foreground="{StaticResource InviteBrush}" />
+                                </Grid>
+
+                                <Border Grid.Column="1"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Margin="20"
+                                        Background="#0091EA">
+                                    <TextBlock Text="INVITE" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               Foreground="White"
+                                               Margin="25 10"
+                                               FontSize="20"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </selectors:TypeBasedTemplateSelector>
+                </DataTemplate>
+            </imo:LongListSelector.ItemTemplate>
+        </imo:LongListSelector>
+    </Grid>
+
+</local:ImoPage>

@@ -1,0 +1,34 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ImoTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d"
+             x:Name="imoTextBoxRoot"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+    <Grid>
+        <toolkit:PhoneTextBox Text="{Binding Text, ElementName=imoTextBoxRoot, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                              Hint="{Binding PlaceholderText, ElementName=imoTextBoxRoot}"
+                              TextChanged="textBox_TextChanged"
+                              Background="White"
+                              IsTabStop="True"
+                              MaxLength="{Binding MaxLength, ElementName=imoTextBoxRoot}"
+                              x:Name="textBox"
+                              Margin="0 0 0 6" BorderThickness="0"
+                              InputScope="{Binding InputScope, ElementName=imoTextBoxRoot}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused"/>
+                    <VisualState x:Name="Unfocused"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </toolkit:PhoneTextBox>
+        <Border VerticalAlignment="Bottom" Height="6" BorderThickness="2 0 2 2"
+                x:Name="border"
+                BorderBrush="{StaticResource UIElementBorderBrush}"/>
+    </Grid>
+</UserControl>

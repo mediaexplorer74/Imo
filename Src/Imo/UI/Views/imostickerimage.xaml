@@ -1,0 +1,33 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ImoStickerImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+             mc:Ignorable="d"
+             x:Name="imoStickerRoot"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Canvas x:Name="canvas">
+            <Canvas.Clip>
+                <RectangleGeometry x:Name="canvasClip" />
+            </Canvas.Clip>
+            <Image x:Name="image">
+                <Image.RenderTransform>
+                    <ScaleTransform CenterX="0" CenterY="0" x:Name="imageScaleTransform" />
+                </Image.RenderTransform>
+            </Image>
+        </Canvas>
+        <!--<Grid VerticalAlignment="Center" HorizontalAlignment="Center"
+              Visibility="{Binding IsShowingBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=imoStickerRoot}">
+            <ProgressBar IsIndeterminate="True" HorizontalAlignment="Center" Height="25" Width="60" Background="Transparent" />
+        </Grid>-->
+    </Grid>
+</UserControl>

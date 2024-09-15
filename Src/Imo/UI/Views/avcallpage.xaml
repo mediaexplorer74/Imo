@@ -1,0 +1,224 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.AVCallPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:views="clr-namespace:ImoSilverlightApp.UI.Views"
+    mc:Ignorable="d"
+    d:DesignHeight="350" d:DesignWidth="200" Orientation="Portrait">
+
+    <local:ImoPage.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" />
+        <converters:SpeakerButtonIconConverter x:Key="SpeakerButtonIconConverter" />
+        <converters:GroupCallMarginConverter x:Key="GroupCallMarginConverter" />
+        <converters:GroupCallBorderWidthConverter x:Key="GroupCallBorderWidthConverter" />
+        <converters:GroupCallBorderHeightConverter x:Key="GroupCallBorderHeightConverter" />
+        <converters:GroupCallBorderAngleConverter x:Key="GroupCallBorderAngleConverter" />
+        <converters:GroupCallImageAngleConverter x:Key="GroupCallImageAngleConverter" />
+    </local:ImoPage.Resources>
+
+    <Grid>
+        <MediaElement x:Name="ringtoneElement" AutoPlay="False" Source="/Assets/ringing.wav" />
+        <MediaElement x:Name="callOutElement" AutoPlay="False" Source="/Assets/dialing.wav" />
+        <DrawingSurface Tap="Grid_Tap"  
+                        x:Name="videoBuddySurface" 
+                        Loaded="VideoBuddySurface_Loaded"/>
+        <!--<Grid Width="{Binding CallController.ScreenHeight}"
+              Height="{Binding CallController.ScreenHeight}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Background="Black"
+              Tap="Grid_Tap">
+           
+            <Image x:Name="videoBuddy" Source="{Binding CallController.CurrentFrame}"
+                       Stretch="Uniform"
+                       Visibility="{Binding CallController.IsVideoCall, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       RenderTransformOrigin="0.5 0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="{Binding CallController.FlipXRatioBig}"/>
+                        <RotateTransform Angle="{Binding CallController.BuddyCameraAngle}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <Grid x:Name="videoGroup"
+                  Width="{Binding CallController.ScreenWidth}"
+                  Height="{Binding CallController.ScreenHeight}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Visibility="{Binding CallController.IsGroupCall, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                <Border Margin="{Binding CallController.CameraAngle1, Converter={StaticResource GroupCallMarginConverter}}" 
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        BorderThickness="0"
+                        Width="{Binding CallController.CameraAngle1, Converter={StaticResource GroupCallBorderWidthConverter}}"
+                        Height="{Binding CallController.CameraAngle1, Converter={StaticResource GroupCallBorderHeightConverter}}"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding CallController.CameraAngle1, Converter={StaticResource GroupCallBorderAngleConverter}}"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Width="{Binding CallController.GroupSlotHeight}"
+                           Height="{Binding CallController.GroupSlotWidth}"
+                           Source="{Binding CallController.CurrentFrameSlot1}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding CallController.CameraAngle1, Converter={StaticResource GroupCallImageAngleConverter}}"/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Border>
+
+                <Border Margin="{Binding CallController.CameraAngle2, Converter={StaticResource GroupCallMarginConverter}}" 
+                        VerticalAlignment="Top" HorizontalAlignment="Right"
+                        BorderThickness="0"
+                        Width="{Binding CallController.CameraAngle2, Converter={StaticResource GroupCallBorderWidthConverter}}"
+                        Height="{Binding CallController.CameraAngle2, Converter={StaticResource GroupCallBorderHeightConverter}}"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding CallController.CameraAngle2, Converter={StaticResource GroupCallBorderAngleConverter}}"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Width="{Binding CallController.GroupSlotHeight}"
+                           Height="{Binding CallController.GroupSlotWidth}"
+                           Source="{Binding CallController.CurrentFrameSlot2}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding CallController.CameraAngle2, Converter={StaticResource GroupCallImageAngleConverter}}"/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Border>
+
+                <Border Margin="{Binding CallController.CameraAngle3, Converter={StaticResource GroupCallMarginConverter}}" 
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        BorderThickness="0"
+                        Width="{Binding CallController.CameraAngle3, Converter={StaticResource GroupCallBorderWidthConverter}}"
+                        Height="{Binding CallController.CameraAngle3, Converter={StaticResource GroupCallBorderHeightConverter}}"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding CallController.CameraAngle3, Converter={StaticResource GroupCallBorderAngleConverter}}"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Width="{Binding CallController.GroupSlotHeight}"
+                           Height="{Binding CallController.GroupSlotWidth}"
+                           Source="{Binding CallController.CurrentFrameSlot3}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding CallController.CameraAngle3, Converter={StaticResource GroupCallImageAngleConverter}}"/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Border>
+
+                <Border Margin="{Binding CallController.MeCameraAngle, Converter={StaticResource GroupCallMarginConverter}}" 
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        BorderThickness="0"
+                        Width="{Binding CallController.GroupSlotHeight}"
+                        Height="{Binding CallController.GroupSlotWidth}"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="{Binding CallController.FlipXRatio}"/>
+                            <RotateTransform Angle="{Binding CallController.MeCameraAngle}"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Image x:Name="groupVideoMe"
+                           Width="{Binding CallController.GroupSlotHeight}"
+                           Height="{Binding CallController.GroupSlotHeight}"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Stretch="Uniform" />
+                </Border>
+            </Grid>
+        </Grid>-->
+        <Grid VerticalAlignment="Top" Name="headerGrid">
+            <Border Background="Black" Opacity="0.5" Visibility="{Binding CallController.ShowCallHeaderInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <views:ImoContactIcon DataContext="{Binding Contact}" Width="60" Height="60" />
+                    <StackPanel VerticalAlignment="Center" Margin="20 15">
+                        <TextBlock x:Name="buddyNameText" Text="{Binding Contact.Alias}" Foreground="White" FontSize="30" FontFamily="Segoe UI Light" />
+                        <TextBlock x:Name="callingText" Text="{Binding CallController.CallStatus}" Foreground="White" FontSize="18" Margin="0 2 0 0" FontFamily="Segoe UI Light" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!--<Border Margin="-42 62 0 0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                    BorderThickness="1" BorderBrush="White"
+                    Width="240"
+                    Height="135"
+                    Visibility="{Binding CallController.ShowSelfPreview, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="{Binding CallController.FlipXRatio}"/>
+                        <RotateTransform Angle="{Binding CallController.MeCameraAngle}"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Image x:Name="videoMe" Width="240" Height="180"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Stretch="Uniform" />
+                --><!--<CaptureElement x:Name="capturePreview" Width="320" Height="240"/>--><!--
+            </Border>-->
+        </Grid>
+
+        <Grid Name="footerGrid" VerticalAlignment="Bottom"
+              Visibility="{Binding CallController.ShowFooter, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="2" Background="Black" Opacity="0.5" 
+                    Visibility="{Binding CallController.IsVideoCall, Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
+
+            <TextBlock Text="{Binding Contact.Alias}" Foreground="White" 
+                       FontSize="35" FontFamily="Segoe UI Light" HorizontalAlignment="Center"
+                       Margin="0 0 0 20"
+                       Visibility="{Binding CallController.ShowCallHeaderInfo, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"/> 
+            
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="8 8 8 60" HorizontalAlignment="Center">
+                <views:IconCircleButton x:Name="buttonSpeaker"
+                                        IconName="{Binding CallController.IsSpeakerOn, Converter={StaticResource SpeakerButtonIconConverter}}"
+                                        Background="{StaticResource FlipCameraBrush}"
+                                        Visibility="{Binding CallController.ShowSpeakerButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Width="100" Height="100" HorizontalAlignment="Center" BorderThickness="0" Margin="15 0"
+                                        Click="buttonSpeaker_Click"/>
+                <views:IconCircleButton x:Name="buttonFlipCamera"
+                                        IconName="VideoFlipIcon"
+                                        Background="{StaticResource FlipCameraBrush}"
+                                        Visibility="{Binding CallController.ShowFlipCameraButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Width="100" Height="100" HorizontalAlignment="Center" BorderThickness="0" Margin="15 0"
+                                        Click="buttonFlipCamera_Click"/>
+                <views:IconCircleButton x:Name="buttonReject"
+                                        IconName="AudioCallIcon"
+                                        Background="{StaticResource CallRejectBrush}"
+                                        Width="100" Height="100" HorizontalAlignment="Center"
+                                        BorderThickness="0" Margin="15 0" Click="buttonReject_Click"
+                                        RenderTransformOrigin="0.5 0.5">
+                    <views:IconCircleButton.RenderTransform>
+                        <RotateTransform Angle="135" />
+                    </views:IconCircleButton.RenderTransform>
+                </views:IconCircleButton>
+
+                <views:IconCircleButton x:Name="buttonAnswer"
+                                        IconName="AudioCallIcon"
+                                        Background="{StaticResource CallBrush}"
+                                        Visibility="{Binding CallController.ShowAnswerButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Width="100" Height="100" HorizontalAlignment="Center" BorderThickness="0" Margin="15 0"
+                                        Click="buttonAnswer_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</local:ImoPage>

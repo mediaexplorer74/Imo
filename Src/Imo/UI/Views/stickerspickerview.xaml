@@ -1,0 +1,111 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.StickersPickerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+             xmlns:selectors="clr-namespace:ImoSilverlightApp.Selectors"
+             xmlns:controls="clr-namespace:ImoSilverlightApp.UI.Views"
+             xmlns:imo="clr-namespace:Imo.Phone.Controls"
+             xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource StickersPickerBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="0 1" BorderBrush="{StaticResource UIElementBorderBrush}">
+            <ListBox ItemsSource="{Binding StickerItems}"
+                     x:Name="stickerPacskItemsControl"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <selectors:TypeBasedTemplateSelector Content="{Binding}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                                <DataTemplate>
+                                    <Grid Tap="StickerPack_Tapped" Background="Transparent">
+                                        <local:ImoImage Url="{Binding StickerPack.ImageUrl}" Height="56" Width="56" Margin="5" />
+                                        <Border VerticalAlignment="Bottom" Height="4"
+                                                Background="{StaticResource StickersPickerPackSelectedBrush}"
+                                                Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </selectors:TypeBasedTemplateSelector.DefaultTemplate>
+
+                            <DataTemplate x:Key="DrawingCanvasViewModel">
+                                <Grid Tap="StickerPack_Tapped" Background="Transparent">
+                                    <Image Height="56" Width="56" Margin="5" Source="/Assets/brush.png" />
+                                    <Border VerticalAlignment="Bottom" Height="4"
+                                            Background="{StaticResource StickersPickerPackSelectedBrush}"
+                                            Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </selectors:TypeBasedTemplateSelector>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <imo:FlipView x:Name="flipView" ItemsSource="{Binding StickerItems}" Grid.Row="1"
+                      SelectedItem="{Binding SelectedStickerItem, Mode=TwoWay}">
+            <imo:FlipView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </imo:FlipView.ItemsPanel>
+            <imo:FlipView.ItemTemplate>
+                <DataTemplate>
+                    <selectors:TypeBasedTemplateSelector Content="{Binding}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <selectors:TypeBasedTemplateSelector.DefaultTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding StickerPack.Stickers}" HorizontalAlignment="Center">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <toolkit:WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Tap="Sticker_Tapped">
+                                                        <local:ImoStickerImage DataContext="{Binding }" Height="80" Width="80" Margin="10" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+
+                                    <Grid Visibility="{Binding StickerPack.IsSyncing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <local:BusyIndicator VerticalAlignment="Center" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </selectors:TypeBasedTemplateSelector.DefaultTemplate>
+
+                        <DataTemplate x:Key="DrawingCanvasViewModel">
+                            <local:DrawingCanvas />
+                        </DataTemplate>
+                    </selectors:TypeBasedTemplateSelector>
+                </DataTemplate>
+            </imo:FlipView.ItemTemplate>
+        </imo:FlipView>
+    </Grid>
+</UserControl>

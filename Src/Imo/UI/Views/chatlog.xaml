@@ -1,0 +1,128 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ChatLog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:messageTemplates="clr-namespace:ImoSilverlightApp.UI.Views.MessageTemplates"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:selectors="clr-namespace:ImoSilverlightApp.Selectors"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" />
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer x:Name="scrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="loadHistoryButton"
+                        Margin="0 10"
+                        Style="{StaticResource PillButtonStyle}"
+                        Visibility="{Binding Conversation.LoadedAllHistory, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                        Content="Load History"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Click="LoadHistoryButton_Click" />
+
+                <ItemsControl x:Name="msgsListView"
+                              Grid.Row="1"
+                              Background="Transparent"
+                              HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalAlignment="Bottom">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                        Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <selectors:MessageTemplateSelector Content="{Binding }" Loaded="Message_Loaded">
+                                <selectors:MessageTemplateSelector.MsgMeTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MessageMeControl/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.MsgMeTemplate>
+
+                                <selectors:MessageTemplateSelector.MsgBuddyTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MessageBuddyControl/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.MsgBuddyTemplate>
+
+                                <selectors:MessageTemplateSelector.PhotoMeTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MePhotoMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.PhotoMeTemplate>
+
+                                <selectors:MessageTemplateSelector.PhotoBuddyTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:BuddyPhotoMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.PhotoBuddyTemplate>
+
+                                <selectors:MessageTemplateSelector.VideoMeTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MeVideoMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.VideoMeTemplate>
+
+                                <selectors:MessageTemplateSelector.VideoBuddyTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:BuddyVideoMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.VideoBuddyTemplate>
+
+                                <selectors:MessageTemplateSelector.AudioMeTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MeAudioMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.AudioMeTemplate>
+
+                                <selectors:MessageTemplateSelector.AudioBuddyTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:BuddyAudioMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.AudioBuddyTemplate>
+
+                                <selectors:MessageTemplateSelector.StickerMeTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MeStickerMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.StickerMeTemplate>
+
+                                <selectors:MessageTemplateSelector.StickerBuddyTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:BuddyStickerMessage/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.StickerBuddyTemplate>
+
+                                <selectors:MessageTemplateSelector.SystemTemplate>
+                                    <DataTemplate>
+                                        <messageTemplates:MessageSystem/>
+                                    </DataTemplate>
+                                </selectors:MessageTemplateSelector.SystemTemplate>
+                            </selectors:MessageTemplateSelector>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

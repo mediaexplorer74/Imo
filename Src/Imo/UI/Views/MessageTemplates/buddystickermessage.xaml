@@ -1,0 +1,69 @@
+<Grid
+    x:Class="ImoSilverlightApp.UI.Views.MessageTemplates.BuddyStickerMessage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views.MessageTemplates"
+    xmlns:views="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Margin="0 0 0 8"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid.Resources>
+        <convert:BuidToContactConverter x:Key="BuidToContactConverter"/>
+        <convert:VisibilityConverter x:Key="FirstMessageVisiblityConverter" VisibleValue="NONE"/>
+        <convert:VisibilityConverter x:Key="SecondMessageVisiblityConverter" CollapsedValue="MERGE"/>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <convert:IntToVisibilityConverter x:Key="IntToVisibilityConverter" False="-1" />
+        <convert:BuidToIdentIconFillConverter x:Key="buidToIdentIconFillConverter"/>
+        <convert:AliasToInitialsConverter x:Key="AliasToInitialsConverter"/>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="48"/>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Grid Visibility="{Binding MergeType, Converter={StaticResource FirstMessageVisiblityConverter}}"
+          VerticalAlignment="Top" Width="40" Height="40">
+        <Ellipse Fill="{Binding Author, Converter={StaticResource buidToIdentIconFillConverter}}" />
+
+        <TextBlock Text="{Binding AuthorAlias, Converter={StaticResource AliasToInitialsConverter}}"
+                   FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+        <Ellipse DataContext="{Binding Buid, Converter={StaticResource BuidToContactConverter}}"
+                 views:ContactListProperties.ContactPicUrl="{Binding IconUrl}">
+            <Ellipse.Fill>
+                <ImageBrush></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Grid>
+    
+    <StackPanel Grid.Column="2" Margin="8 0 8 0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <StackPanel Orientation="Horizontal">
+            <Grid Visibility="{Binding IsGroup, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <TextBlock Text="{Binding AuthorAlias}" VerticalAlignment="Bottom"
+                                Foreground="#999" Margin="0 0 10 0" FontSize="16" FontWeight="Bold"
+                                Visibility="{Binding MergeType, Converter={StaticResource FirstMessageVisiblityConverter}}"/>
+            </Grid>
+            <TextBlock  Text="{Binding FormattedTimestamp}" FontSize="14" Foreground="#999"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </StackPanel>
+        <views:ImoStickerImage HorizontalAlignment="Left" DataContext="{Binding Sticker}"
+                                   Height="128"
+                                   Width="128"
+                                   AutoPlay="True" >
+            <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                    <toolkit:MenuItem Header="Delete" Click="Delete_Click"
+                                                  Visibility="{Binding Timestamp, Converter={StaticResource IntToVisibilityConverter}}"/>
+                </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
+        </views:ImoStickerImage>
+    </StackPanel>
+</Grid>

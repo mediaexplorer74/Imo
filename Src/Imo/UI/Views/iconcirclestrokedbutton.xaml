@@ -1,0 +1,28 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.IconCircleStrokedButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Padding="10"
+    Background="White"
+    x:Name="rootIconButton"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <Grid x:Name="layoutRoot" Background="Transparent"
+          MouseLeftButtonDown="layoutRoot_MouseLeftButtonDown"
+          MouseLeftButtonUp="layoutRoot_MouseLeftButtonUp"
+          MouseLeave="layoutRoot_MouseLeave">
+        <Grid Margin="{Binding Padding, ElementName=rootIconButton}">
+        <Ellipse x:Name="ellipse"
+            Stroke="{Binding Stroke, ElementName=rootIconButton}" 
+            Fill="{Binding Background, ElementName=rootIconButton}" 
+            StrokeThickness="{Binding StrokeThickness,ElementName=rootIconButton}"/>
+        <local:Icon Margin="10" 
+                    IsHitTestVisible="False"
+                    Background="Transparent" 
+                    IconName="{Binding IconName, ElementName=rootIconButton}"
+                    Foreground="{Binding Foreground, ElementName=rootIconButton}" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,79 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.CodeInputPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="White"
+    shell:SystemTray.ForegroundColor="Black">
+
+    <local:ImoPage.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </local:ImoPage.Resources>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar  x:Name="appBar">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/check.png" Text="Submit" Click="Continue_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <Grid x:Name="LayoutRoot" Margin="20 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ContentRoot">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" FontSize="32" HorizontalAlignment="Center" Text="Verify phone" FontFamily="Segoe UI Light" />
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           FontFamily="Segoe UI Light"
+                           FontSize="16"
+                           Margin="0 10 0 0"
+                           Text="{Binding PhoneNumber, StringFormat='We just sent you an SMS with a code to {0}'}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center" Margin="0 20 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <local:ImoTextBox x:Name="codeTextBox"
+                                  InputScope="Number"
+                                  Text="{Binding CodeText, Mode=TwoWay}"
+                                  VerticalAlignment="Center"
+                                  Margin="4" PlaceholderText="Verification Code" />
+
+                <local:IconCircleButton Grid.Column="1" IconName="PrimitiveAvailableIcon" Width="75" Height="75"
+                                        Background="{StaticResource ButtonBackgroundBrush}"
+                                        Foreground="White"
+                                        Margin="10 0 0 10"
+                                        Click="Continue_Click"
+                                        IsEnabled="{Binding CanContinue}"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{StaticResource BusyIndicatorBackgroundBrush}"
+              Visibility="{Binding ShowBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:BusyIndicator HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </Grid>
+</local:ImoPage>

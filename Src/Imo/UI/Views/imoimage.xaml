@@ -1,0 +1,26 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ImoImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+             xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+             mc:Ignorable="d"
+             x:Name="imoImageRoot"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Image x:Name="image" Stretch="{Binding Stretch, ElementName=imoImageRoot}"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center"
+              x:Name="busyIndicator"
+              Visibility="Collapsed">
+            <local:BusyIndicator HorizontalAlignment="Center" />
+        </Grid>
+    </Grid>
+</UserControl>

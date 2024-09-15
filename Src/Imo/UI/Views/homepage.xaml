@@ -1,0 +1,74 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="White"
+    shell:SystemTray.ForegroundColor="Black">
+    <phone:PhoneApplicationPage.Resources>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar  x:Name="appBar">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/feature.settings.png" Text="Settings" Click="Settings_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/feature.camera.png" Text="Share video" Click="VideoCapture_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/feature.search.png" Text="Search" Click="Search_Click" />
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Mark all as read"
+                              Click="MarkAllAsRead_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="19 12 0 0" Orientation="Horizontal">
+            <TextBlock Text="IMO MESSENGER" Style="{StaticResource TitleTextBlockStyle}" />
+            <Border Background="#7BBC42"
+                                        Margin="8 0 0 0"
+                                        Height="24" Width="24"
+                                        HorizontalAlignment="Right"
+                                        Visibility="{Binding ConversationsManager.HasUnreadConversations, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        CornerRadius="12">
+                <TextBlock Foreground="White" HorizontalAlignment="Center"
+                                               Text="{Binding UnreadConversationsCountUI}"
+                                               FontSize="12" VerticalAlignment="Center"  />
+            </Border>
+        </StackPanel>
+        <Grid Grid.Row="1" Background="#00bfa5"
+              Visibility="{Binding ShowInCallItem, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Tap="InCallItem_Click">
+            <TextBlock Padding="12" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tap to return to call" Foreground="White" />
+        </Grid>
+
+        <phone:Pivot Margin="0 -6.5 0 0" Grid.Row="2" Title="" x:Name="pivot" SelectionChanged="pivotSelectionChanged">
+            <!--Pivot item one-->
+            <phone:PivotItem Margin="10 5 0 0" Header="contacts" x:Name="contactsPivotItem">
+                <local:ContactsList />
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Margin="10 5 0 0" Header="chats" x:Name="chatsPivotItem">
+                <local:ChatsList/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+</local:ImoPage>

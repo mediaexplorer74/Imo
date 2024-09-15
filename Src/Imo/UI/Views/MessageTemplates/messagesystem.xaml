@@ -1,0 +1,74 @@
+<StackPanel
+    x:Class="ImoSilverlightApp.UI.Views.MessageTemplates.MessageSystem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views.MessageTemplates"
+    xmlns:views="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Margin="0 10 0 10"
+    Background="Transparent" 
+    IsHitTestVisible="True"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel.Resources>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <convert:IntToVisibilityConverter x:Key="IntToVisibilityConverter" False="-1" />
+    </StackPanel.Resources>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 0 0 4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Border BorderThickness="0 1 0 0" Height="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#999" Opacity="0.6"/>
+                </Border.BorderBrush>
+            </Border>
+
+            <Border Grid.Column="2" BorderThickness="0 1 0 0" Height="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#999" Opacity="0.6"/>
+                </Border.BorderBrush>
+            </Border>
+
+            <TextBlock Grid.Column="1" Text="{Binding FormattedTimestamp}"
+                           FontSize="14"
+                           Margin="10 0 10 0"
+                           Foreground="#999"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+
+            <Grid MinWidth="90" HorizontalAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap"
+                                HorizontalAlignment="Stretch"  TextAlignment="Center"
+                                Foreground="#999"
+                                VerticalAlignment="Center" FontSize="16" Text="{Binding Msg}" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="{Binding IsMissedCall, Converter={StaticResource BooleanToVisibilityConverter}}" Tap="Callback_Tap">
+                <views:IconCircle IconName="{Binding CallBackIcon}" Background="#0277BD" Width="30" Height="30"></views:IconCircle>
+                <TextBlock VerticalAlignment="Center" FontSize="14" Margin="10 0 0 0"
+                                HorizontalAlignment="Center"
+                                Text="Call Back" />
+            </StackPanel>
+        </StackPanel>
+        <Border BorderThickness="0 0 0 1" Margin="0 8 0 0">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="#999" Opacity="0.6"/>
+            </Border.BorderBrush>
+        </Border>
+ 
+    <toolkit:ContextMenuService.ContextMenu>
+        <toolkit:ContextMenu Background="White" BorderBrush="Black">
+            <toolkit:MenuItem Header="Copy" Click="Copy_Click"/>
+            <toolkit:MenuItem Header="Delete" Click="Delete_Click"
+                Visibility="{Binding Timestamp, Converter={StaticResource IntToVisibilityConverter}}"/>
+        </toolkit:ContextMenu>
+    </toolkit:ContextMenuService.ContextMenu>
+</StackPanel>

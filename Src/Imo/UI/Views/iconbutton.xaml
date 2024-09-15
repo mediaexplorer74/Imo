@@ -1,0 +1,25 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.IconButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="iconButtonRoot"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid Background="Transparent"
+          Tap="Grid_Tapped"
+          x:Name="grid"
+          MouseLeftButtonUp="Grid_PointerReleased"
+          MouseLeftButtonDown="Grid_PointerPressed"
+          MouseLeave="Grid_PointerExited">
+        <Path x:Name="path" Stretch="Fill"
+              IsHitTestVisible="False"
+              Width="{Binding IconSize, ElementName=iconButtonRoot}"
+              Height="{Binding IconSize, ElementName=iconButtonRoot}"
+              Fill="{Binding Foreground, ElementName=iconButtonRoot}" />
+    </Grid>
+</UserControl>

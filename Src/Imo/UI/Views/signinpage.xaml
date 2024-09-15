@@ -1,0 +1,183 @@
+<local:ImoPage x:Class="ImoSilverlightApp.UI.Views.SignInPage"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+               xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+               xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+               xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+               mc:Ignorable="d" Background="Red"
+               x:Name="root" Orientation="Portrait"
+               shell:SystemTray.IsVisible="True"
+               shell:SystemTray.BackgroundColor="White"
+               shell:SystemTray.ForegroundColor="Black">
+    <local:ImoPage.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:ReversedNullToVisibilityConverter x:Key="ReversedNullToVisibilityConverter" />
+    </local:ImoPage.Resources>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="appBar">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/check.png" Text="Submit" Click="Continue_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid x:Name="ContentRoot" Margin="20">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" FontSize="24" HorizontalAlignment="Center" Text="Register With Your Phone Number" FontFamily="Segoe UI Light" />
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           FontFamily="Segoe UI Light"
+                           FontSize="16"
+                           Margin="0 10 0 0"
+                           Text="On imo, your phone number is your account identifier that lets you connect with your friends." />
+                <RichTextBox TextAlignment="Center" Margin="0 10 0 0" TextWrapping="Wrap"
+                             HorizontalAlignment="Center"
+                             FontFamily="Segoe UI Light"
+                             FontSize="14">
+                    <Paragraph>
+                        <Run Text="To create an account, you'll need to enter your phone number and agree to our "/>
+                        <Hyperlink Click="termsOfService_Click">
+                            <Run Text="Terms of Service" Foreground="Black"/>
+                        </Hyperlink>
+                        <Run Text=" and "/>
+                        <Hyperlink Click="privacyPolicy_Click">
+                            <Run Text="Privacy Policy" Foreground="Black"/>
+                        </Hyperlink>
+                        <Run Text="which explain how we use your personal information." />
+                    </Paragraph>
+                </RichTextBox>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           FontFamily="Segoe UI Light"
+                           FontSize="16"
+                           Margin="0 10 0 0"
+                           Text="If you agree, click 'Agree and Continue'."/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center" Margin="20 0 20 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="{StaticResource UIElementBorderBrush}" BorderThickness="0 2 0 2" Background="Transparent">
+                <Grid>
+                    <Button HorizontalAlignment="Center" BorderThickness="0" Click="SelectCountry_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding SelectedCountryCodeData.Country}" />
+                            <Path x:Name="Arrow"
+                                  Stretch="Fill"
+                                  Fill="{StaticResource ForegroundLighterBrush}"
+                                  Width="16"
+                                  Height="16"
+                                  VerticalAlignment="Center"
+                                  Data="M 16 16 0 -1 M 0 -2 0 1 M 0 2 l 8 12 l 8 -12 z"
+                                  Margin="10 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="+" VerticalAlignment="Center" />
+
+                <local:ImoTextBox Text="{Binding PhoneCCText, Mode=TwoWay}"
+                                  VerticalAlignment="Center"
+                                  Width="80"
+                                  InputScope="Number"
+                                  Grid.Column="1"
+                                  Margin="4" />
+
+                <local:ImoTextBox Text="{Binding ApplicationSettings.PhoneNumber, Mode=TwoWay}" Grid.Column="2"
+                                  VerticalAlignment="Center"
+                                  x:Name="phoneInputTextBox"
+                                  Margin="4" PlaceholderText="Phone Number"
+                                  InputScope="TelephoneNumber"/>
+
+                <local:IconCircleButton Grid.Column="3" IconName="PrimitiveAvailableIcon" Width="75" Height="75"
+                                        Background="{StaticResource ButtonBackgroundBrush}"
+                                        Foreground="White"
+                                        Margin="10 0 0 10"
+                                        Click="Continue_Click"
+                                        IsEnabled="{Binding CanContinue}"/>
+            </Grid>
+        </Grid>
+
+        <TextBlock Text="Agree and Continue" Grid.Row="1" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 0" />
+
+        <Grid Grid.Row="1" Background="{StaticResource BusyIndicatorBackgroundBrush}"
+              Visibility="{Binding ShowBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:BusyIndicator VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+
+        <Popup x:Name="countriesPopup" Grid.RowSpan="2">
+            <Grid x:Name="popupGrid" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"  />
+                    <RowDefinition Height="Auto"  />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Choose a country"
+                           Style="{StaticResource TitleTextBlockStyle}" FontSize="32" Margin="15 0 0 0" />
+
+                <Grid Grid.Row="1" Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <local:Icon IconName="SearchIcon" Height="20" Width="20" Foreground="Black" VerticalAlignment="Center" />
+
+                    <local:ImoTextBox PlaceholderText="Search country..." Text="{Binding SearchText, Mode=TwoWay}"
+                                      Grid.Column="1" Margin="15 0 0 0" VerticalAlignment="Center" />
+                </Grid>
+
+                <ListBox Grid.Row="2" ItemsSource="{Binding FilteredCountryCodesData}" x:Name="listView">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel  Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="{StaticResource UIElementBorderLightBrush}"
+                                    BorderThickness="0 0 0 1" Padding="0 15 0 15" Margin="25 0"
+                                    Background="Transparent"
+                                    Tap="country_Tapped">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Country}" Foreground="Black" FontSize="24" />
+                                    <TextBlock Grid.Column="1" Text="{Binding PhoneCC}" Foreground="Black" FontSize="24" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Popup>
+    </Grid>
+</local:ImoPage>

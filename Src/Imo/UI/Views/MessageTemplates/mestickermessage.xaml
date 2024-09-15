@@ -1,0 +1,63 @@
+<Grid
+    x:Class="ImoSilverlightApp.UI.Views.MessageTemplates.MeStickerMessage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views.MessageTemplates"
+    xmlns:views="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Margin="0 0 0 8"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid.Resources>
+        <convert:VisibilityConverter x:Key="FirstMessageVisiblityConverter" VisibleValue="NONE"/>
+        <convert:VisibilityConverter x:Key="SecondMessageVisiblityConverter" CollapsedValue="MERGE"/>
+        <convert:IntToVisibilityConverter x:Key="IntToVisibilityConverter" False="-1" />
+        <convert:BuidToIdentIconFillConverter x:Key="buidToIdentIconFillConverter"/>
+        <convert:AliasToInitialsConverter x:Key="AliasToInitialsConverter"/>
+    </Grid.Resources>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition Width="48"/>
+    </Grid.ColumnDefinitions>
+
+
+    <Grid x:Name="selfIconGrid" Visibility="{Binding MergeType, Converter={StaticResource FirstMessageVisiblityConverter}}"
+                    Grid.Column="2" VerticalAlignment="Top" Width="40" Height="40">
+        <Ellipse Fill="{Binding User.Uid, Converter={StaticResource buidToIdentIconFillConverter}}" />
+
+        <TextBlock Text="{Binding User.Alias, Converter={StaticResource AliasToInitialsConverter}}"
+                   FontSize="16"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+        <Ellipse x:Name="ellipse" views:ContactListProperties.ContactPicUrl="{Binding IconUrl}">
+            <Ellipse.Fill>
+                <ImageBrush></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Grid>
+
+    <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+        <views:MessageState HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <StackPanel Orientation="Vertical" Margin="30 0 8 0" VerticalAlignment="Top" HorizontalAlignment="Stretch" >
+            <TextBlock
+                       Foreground="#999" Opacity="0.5"
+                       Text="{Binding FormattedTimestamp}"
+                       FontSize="14"/>
+            <views:ImoStickerImage HorizontalAlignment="Right" DataContext="{Binding Sticker}"
+                                       Height="128"
+                                       Width="128"
+                                       AutoPlay="True" >
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu Background="White" BorderBrush="Black">
+                        <toolkit:MenuItem Header="Delete" Click="Delete_Click"
+                                                  Visibility="{Binding Timestamp, Converter={StaticResource IntToVisibilityConverter}}"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+            </views:ImoStickerImage>
+        </StackPanel>
+    </Grid>
+</Grid>

@@ -1,0 +1,43 @@
+<local:ImoPage
+            x:Class="ImoSilverlightApp.UI.Views.CreateGroupPage"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+            xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+            xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+            FontSize="{StaticResource PhoneFontSizeNormal}"
+            Foreground="{StaticResource PhoneForegroundBrush}"
+            SupportedOrientations="Portrait" Orientation="Portrait"
+            mc:Ignorable="d"
+            shell:SystemTray.IsVisible="True"
+            shell:SystemTray.BackgroundColor="White"
+            shell:SystemTray.ForegroundColor="Black">
+    <local:ImoPage.ApplicationBar>
+        <shell:ApplicationBar  x:Name="appBar">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/check.png" Text="Create" Click="CreateGroup_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/close.png" Text="Cancel" Click="Cancel_Click" />
+        </shell:ApplicationBar>
+    </local:ImoPage.ApplicationBar>
+    <Grid x:Name="LayoutRoot" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="19,0,0,0" Text="CREATE GROUP" />
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <local:ImoTextBox x:Name="groupNameTextBox"
+                TextChanged="groupNameTextBox_TextChanged"
+                PlaceholderText="Group Name"/>
+        </Grid>
+
+        <local:ContactSelectorView x:Name="selectorControl" Grid.Row="2" Margin="15 9.5 15 0" />
+    </Grid>
+</local:ImoPage>

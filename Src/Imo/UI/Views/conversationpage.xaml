@@ -1,0 +1,198 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.ConversationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="White"
+    shell:SystemTray.ForegroundColor="Black"
+    Tap="Page_Tapped">
+    <local:ImoPage.Resources>
+        <convert:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <convert:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <convert:EnumerableToVisibilityConverter x:Key="EnumerableToVisibilityConverter" />
+        <convert:ContactListToStringConverter x:Key="ContactListToStringConverter" />
+    </local:ImoPage.Resources>
+    <Grid x:Name="LayoutRoot" Background="#e3e3e3">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="15 10 0 10" Background="Transparent" Tap="Header_Tapped">
+                <TextBlock Text="{Binding Contact.Alias}" Foreground="Black" FontSize="32"/>
+                <TextBlock Text="{Binding Contact.LastActivityFormatted}" Foreground="{StaticResource ForegroundLighterBrush}" FontSize="15"
+                           Visibility="{Binding Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"/>
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Contact.GroupMembersCountString}" Foreground="{StaticResource ForegroundLighterBrush}" FontSize="15"
+                           Visibility="{Binding Contact.IsGroup, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
+                <local:IconButton Width="64" Height="64"
+                                  IconSize="32"
+                                  Margin="0 0 10 0"
+                                  Click="PhotoGallery_Tapped"
+                                  Visibility="{Binding Contact.IsGroup, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  IconName="GalleryIcon" Foreground="{StaticResource IconBrush}"/>
+
+                <local:IconButton Click="AudioCall_Click"
+                                  IconSize="32"
+                                  Width="64"
+                                  Height="64"
+                                  Margin="0 0 0 0"
+                                  Visibility="{Binding Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                  Foreground="#0091EA"
+                                  IconName="AudioCallIcon"/>
+
+                <local:IconButton Click="VideoCall_Click"
+                                  IconSize="32"
+                                  Width="64"
+                                  Height="64"
+                                  Margin="0 0 20 0"
+                                  Foreground="#0091EA"
+                                  IconName="VideoCallIcon"/>
+
+            </StackPanel>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2"
+                    BorderThickness="0 0 0 1"
+                    BorderBrush="{StaticResource MainPageBordersBrush}"
+                    Background="{StaticResource BackgroundCyanBrush}"
+                    Visibility="{Binding Contact.GroupCallMembers, Converter={StaticResource EnumerableToVisibilityConverter}, Mode=OneWay}"
+                    Tap="VideoCall_Click" >
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Margin="10">
+                    <TextBlock Foreground="{StaticResource ForegroundWhiteBrush}" HorizontalAlignment="Center"
+                               Text="{Binding Contact.GroupCallMembers, Converter={StaticResource ContactListToStringConverter}, Mode=OneWay, StringFormat='{}{0} in group call'}"/>
+                    <TextBlock Foreground="{StaticResource ForegroundWhiteBrush}" HorizontalAlignment="Center" Text="Tap to join" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10 0">
+            <local:ChatLog x:Name="chatLog" DataContext="{Binding ChatLogViewModel}" />
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0 60 0 0">
+            <ProgressBar Visibility="{Binding ShowBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          IsIndeterminate="True" HorizontalAlignment="Center" Height="32" Width="150" Background="Transparent" />
+        </Grid>
+
+        <Grid Grid.Row="1"
+              VerticalAlignment="Top"
+              Visibility="{Binding Contact.IsGroup, Converter={StaticResource ReverseBooleanToVisibilityConverter}, FallbackValue='Collapsed'}">
+            <Grid Visibility="{Binding Contact.IsBuddy, Converter={StaticResource ReverseBooleanToVisibilityConverter},
+                              FallbackValue='Collapsed'}"
+                  Background="{StaticResource AddBlockBackgroundBrush}"
+                  Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Tap="Blocked_Tapped" Background="Transparent">
+                    <TextBlock Text="Block" Foreground="White"/>
+                </Border>
+
+                <Border VerticalAlignment="Center" Grid.Column="1" Tap="Add_Tapped" Background="Transparent">
+                    <Border BorderBrush="White" BorderThickness="1 0 0 0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <local:Icon IconName="PrimitiveAvailableIcon" Height="20" Width="20" Foreground="White"/>
+                            <TextBlock Text="Add" Foreground="White" Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1" Margin="15 0">
+            <local:ChatHeadsView DataContext="{Binding ChatHeadsViewModel}" />
+        </Grid>
+
+        <Grid Grid.Row="3" Background="White">
+            <TextBox x:Name="messageTextBox"
+                     Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                     KeyDown="messageTextBox_KeyDown"
+                     GotFocus="messageTextBox_GotFocus"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     InputScope="Chat"
+                     VerticalContentAlignment="Center"
+                     TextWrapping="Wrap"
+                     TextChanged="TextBox_TextChanged" Width="Auto"
+                     BorderThickness="0" Padding="60 5 100 5" />
+
+            <Border Padding="5" Background="Transparent" HorizontalAlignment="Left" Tap="sendVideo_Tapped">
+                <local:IconCircle IconName="VideoCallIcon" Height="50" Width="50"
+                                  Foreground="{StaticResource IconBrush}"
+                                  Background="{StaticResource VideoIconBrush}"
+                                  VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+
+            <Grid Visibility="{Binding HasMessage, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                  Margin="0 0 55 0" HorizontalAlignment="Right"
+                  Width="55">
+                <local:IconButton Background="Transparent" IconName="ImageIcon"
+                                  Click="SendImage_Click"
+                                  Foreground="{StaticResource IconBrush}"
+                                  IconSize="35" />
+            </Grid>
+
+            <Grid Visibility="{Binding HasMessage, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Right"
+                  Width="55">
+                <local:IconButton IconName="StickersIcon"
+                                  Click="Stickers_Click"
+                                  Foreground="{StaticResource IconBrush}"
+                                  IconSize="35" />
+            </Grid>
+
+            <Grid Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  HorizontalAlignment="Right"
+                  Width="55">
+                <local:IconButton Foreground="{StaticResource IconBrush}"
+                                  Click="SendButton_Click"
+                                  IconSize="35"
+                                  IconName="SendIcon" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="4"
+              Visibility="{Binding ShowStickers, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:StickersPickerView x:Name="stickersPickerView" />
+        </Grid>
+
+        <Border Background="White" Grid.Row="5" x:Name="fix10margin" />
+    </Grid>
+</local:ImoPage>

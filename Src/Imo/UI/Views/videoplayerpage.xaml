@@ -1,0 +1,33 @@
+<local:ImoPage
+        x:Class="ImoSilverlightApp.UI.Views.VideoPlayerPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+        xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+        xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+        xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        FontFamily="{StaticResource PhoneFontFamilyNormal}"
+        FontSize="{StaticResource PhoneFontSizeNormal}"
+        Foreground="{StaticResource PhoneForegroundBrush}"
+        SupportedOrientations="Portrait" Orientation="Portrait"
+        mc:Ignorable="d"
+        x:Name="videoPlayerPageRoot"
+        shell:SystemTray.IsVisible="False">
+    <local:ImoPage.Resources>
+        <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <converters:ReverseStringToVisibilityConverter x:Key="ReverseStringToVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </local:ImoPage.Resources>
+    <Grid x:Name="LayoutRoot">
+        <MediaElement x:Name="player" MediaOpened="player_MediaOpened"  MediaEnded="Player_MediaEnded" Tap="player_Tapped"
+                      Stretch="UniformToFill" />
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Visibility="{Binding ProgressMessage, ElementName=videoPlayerPageRoot,
+                        Converter={StaticResource StringToVisibilityConverter}}"
+                       Text="{Binding ProgressMessage, ElementName=videoPlayerPageRoot}"/>
+    </Grid>
+</local:ImoPage>

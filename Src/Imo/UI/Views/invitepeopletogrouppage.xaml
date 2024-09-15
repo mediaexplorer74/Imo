@@ -1,0 +1,48 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.InvitePeopleToGroupPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.ForegroundColor="Black"
+    shell:SystemTray.BackgroundColor="White">
+    <local:ImoPage.Resources>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </local:ImoPage.Resources>
+    <local:ImoPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="appBar">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/check.png" Text="Create" Click="AddMembers_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/close.png" Text="Cancel" Click="Cancel_Click" />
+        </shell:ApplicationBar>
+    </local:ImoPage.ApplicationBar>
+    <Grid x:Name="LayoutRoot" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="19,0,0,0" Text="ADD GROUP MEMBERS" Style="{StaticResource TitleTextBlockStyle}" CharacterSpacing="-25"/>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <TextBlock Text="{Binding Contact.Alias}" Margin="0,-6.5,0,6.5" Style="{StaticResource HeaderTextBlockStyle}" CharacterSpacing="-25"/>
+        </Grid>
+
+        <local:ContactSelectorView x:Name="selectorControl" Grid.Row="2" Margin="15,9.5,15,0" />
+        <Grid Background="{StaticResource BusyIndicatorBackgroundBrush}" Grid.RowSpan="3"
+              Visibility="{Binding ShowBusyIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Center" Height="50" Width="250" Background="Transparent" />
+        </Grid>
+    </Grid>
+</local:ImoPage>

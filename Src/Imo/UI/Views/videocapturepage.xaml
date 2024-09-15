@@ -1,0 +1,95 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.VideoCapturePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    mc:Ignorable="d"
+    x:Name="videoCapturePageRoot"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="progressStoryboard">
+            <DoubleAnimation Storyboard.TargetName="progressTransform"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0"
+                             To="1"
+                             x:Name="progressAnimation"
+                             Duration="0:0:15" />
+        </Storyboard>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </phone:PhoneApplicationPage.Resources>
+    <Grid Background="White">
+        <Grid>
+            <Grid.RenderTransform>
+                <ScaleTransform x:Name="capturePreviewScaleTransform" />
+            </Grid.RenderTransform>
+
+            <Canvas x:Name="viewfinderCanvas">
+                <!--Camera viewfinder -->
+                <Canvas.Background>
+                    <VideoBrush x:Name="viewfinderBrush">
+                        <!--<VideoBrush.RelativeTransform>
+                            <CompositeTransform CenterX="0.5" CenterY="0.5" Rotation="90" />
+                        </VideoBrush.RelativeTransform>-->
+                    </VideoBrush>
+                </Canvas.Background>
+            </Canvas>
+        </Grid>
+
+        <Grid VerticalAlignment="Top" >
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="28"
+                       x:Name="titleText" Foreground="White" Margin="110 0" />
+
+            <local:IconCircle IconName="VideoFlipIcon"
+                              Height="100"
+                              Width="100"
+                              Background="Transparent"
+                              Foreground="White"
+                              Margin="0 0 10 0"
+                              Tap="FlipCamera_Tapped"
+                              HorizontalAlignment="Right" />
+        </Grid>
+
+        <Grid HorizontalAlignment="Center"
+              Margin="0 0 0 40"
+              Opacity="0.9"
+              VerticalAlignment="Bottom"
+              Tap="SendVideo_Tapped">
+
+            <local:IconCircleButton Background="{StaticResource SendVideoBrush}"
+                                    Height="100" Width="100" IconName="SendIcon"
+                                    Foreground="White"
+                                    Margin="0 0 0 35"/>
+
+            <TextBlock Text="Recording, tap to send"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Bottom"
+                       Visibility="{Binding IsRecording, ElementName=videoCapturePageRoot, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
+
+        <Grid Height="30" VerticalAlignment="Bottom" Opacity="0.8">
+            <Border Background="Black"/>
+
+            <Border Background="White">
+                <Border.RenderTransform>
+                    <CompositeTransform x:Name="progressTransform" ScaleX="0" />
+                </Border.RenderTransform>
+            </Border>
+        </Grid>
+    </Grid>
+
+</local:ImoPage>

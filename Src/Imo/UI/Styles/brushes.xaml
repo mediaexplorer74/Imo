@@ -1,0 +1,52 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="IconBrush" Color="#0277BD" />
+
+    <SolidColorBrush x:Key="InviteBrush" Color="#0091EA"/>
+    <SolidColorBrush x:Key="SendVideoBrush" Color="#E03E76" />
+
+    <SolidColorBrush x:Key="UIElementFocusedBorderBrush" Color="#0091EA"/>
+    <SolidColorBrush x:Key="UIElementBorderBrush" Color="#ddd"/>
+    <SolidColorBrush x:Key="UIElementBorderLightBrush" Color="#ddd"/>
+
+    <SolidColorBrush x:Key="AvailableBrush" Color="#7cbc00" />
+    <SolidColorBrush x:Key="AwayBrush" Color="#ffd200"/>
+    <SolidColorBrush x:Key="OfflineBrush" Color="#ddd" />
+
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#0091EA" />
+    <SolidColorBrush x:Key="ImoIconBrush" Color="#1D53A1" />
+    <SolidColorBrush x:Key="BusyIndicatorBackgroundBrush" Color="#ccffffff" />
+
+    <SolidColorBrush x:Key="CallBrush" Color="#7cbc00" />
+    <SolidColorBrush x:Key="CallRejectBrush" Color="#ff471a" />
+    <SolidColorBrush x:Key="FlipCameraBrush" Color="#aaaaaa" />
+
+    <SolidColorBrush x:Key="GroupForegroundColor" Color="#D46363"/>
+    <SolidColorBrush x:Key="ChatForegroundColor" Color="#222"/>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="BackgroundCyanBrush" Color="#00bfa5" />
+    <SolidColorBrush x:Key="ForegroundBrush" Color="#222"/>
+    <SolidColorBrush x:Key="ForegroundLightBrush" Color="#555"/>
+    <SolidColorBrush x:Key="ForegroundLighterBrush" Color="#999"/>
+    <SolidColorBrush x:Key="ForegroundWhiteBrush" Color="#FFF" />
+
+    <SolidColorBrush x:Key="ListItemSelectedBrush" Color="#D2E3F7" />
+    <SolidColorBrush x:Key="ListItemHoverBrush" Color="#ECF3FB" />
+
+    <SolidColorBrush x:Key="LinkTextForegroundBrush" Color="#5095D4" />
+    <SolidColorBrush x:Key="MyLinkTextForegroundBrush" Color="#C4E1F2" />
+
+    <SolidColorBrush x:Key="MainPageBordersBrush" Color="#DADADA" />
+
+    <SolidColorBrush x:Key="AddBlockBackgroundBrush" Color="#0091EA" />
+
+    <SolidColorBrush x:Key="FavoriteBrush" Color="#FFD200" />
+
+    <SolidColorBrush x:Key="VideoIconBrush" Color="#EF4C83"/>
+
+    <SolidColorBrush x:Key="StickersPickerBrush" Color="White" />
+    <SolidColorBrush x:Key="StickersPickerPackSelectedBrush" Color="#1D53A1" />
+</ResourceDictionary>

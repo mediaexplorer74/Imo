@@ -1,0 +1,25 @@
+﻿<Application
+    x:Class="ImoSilverlightApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImoSilverlightApp">
+
+ <Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="UI/Styles/Resources.xaml"/>
+            <ResourceDictionary Source="UI/Styles/Brushes.xaml"/>
+            <ResourceDictionary Source="UI/Styles/IconPaths.xaml"/>
+            <ResourceDictionary Source="UI/Styles/Smileys.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+
+<!--Application.ApplicationLifetimeObjects>
+    <shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+</Application.ApplicationLifetimeObjects-->
+
+</Application>
+

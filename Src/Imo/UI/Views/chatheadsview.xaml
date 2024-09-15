@@ -1,0 +1,84 @@
+<UserControl x:Class="ImoSilverlightApp.UI.Views.ChatHeadsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:StringFormatConverter x:Key="IsTypingStringConverter" StringFormat="{}{0} is typing"/>
+        <converters:StringFormatConverter x:Key="SeenStringConverter" StringFormat="Seen by {0}"/>
+
+        <DataTemplate x:Key="ChatHeadTemplate">
+            <Grid Height="42" Width="42" Margin="0 0 2 5">
+                <Ellipse Fill="#8cd6c2" Visibility="{Binding IsInChat, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <local:ImoContactIcon Margin="3" DataContext="{Binding Contact}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="TyperTemplate">
+            <Grid Margin="0 0 0 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Height="42" Width="42" VerticalAlignment="Top">
+                    <Ellipse Fill="#8cd6c2" />
+                    <local:ImoContactIcon Margin="3" DataContext="{Binding Contact}" />
+                </Grid>
+
+                <Border Grid.Column="1" Grid.RowSpan="2" Margin="9 0 0 0"
+                        HorizontalAlignment="Left" BorderBrush="White" Background="White"
+                        BorderThickness="1" VerticalAlignment="Top" CornerRadius="1">
+                    <TextBlock Margin="5" TextWrapping="Wrap"
+                                   Foreground="#222"
+                                   FontSize="18"
+                                   Text="{Binding Message}"
+                                   HorizontalAlignment="Left"/>
+                </Border>
+
+                <Path Grid.Column="1"
+                      Fill="White"
+                      Stretch="Fill" Stroke="White"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="4.625,8.105,0,7.855"
+                      Data="M1,0 0,0.5 1,1"
+                      Height="10" Width="7"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="0 5 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ItemsControl ItemTemplate="{StaticResource TyperTemplate}" ItemsSource="{Binding Typers}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <ItemsControl Grid.Row="1" ItemTemplate="{StaticResource ChatHeadTemplate}" ItemsSource="{Binding ChatHeads}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

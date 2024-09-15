@@ -1,0 +1,57 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.PhotoStreamViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:converters="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:selectors="clr-namespace:ImoSilverlightApp.Selectors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="photoStreamViewerRoot"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+    <local:ImoPage.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </local:ImoPage.Resources>
+    <Grid Background="Black">
+        <imo:FlipView x:Name="flipView" ItemsSource="{Binding PhotoStream.Photos}" Background="Black"
+                  BorderBrush="Black" BorderThickness="1">
+            <imo:FlipView.ItemTemplate>
+                <DataTemplate>
+                    <selectors:EnumTemplateSelector Content="{Binding }"
+                        PropertyName="Type" EnumType="ImoSilverlightApp.Storage.Models.PhotoType">
+                        <selectors:EnumTemplateSelector.DefaultTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </selectors:EnumTemplateSelector.DefaultTemplate>
+                        <selectors:EnumTemplateSelector.Templates>
+                            <DataTemplate x:Key="Photo">
+                                <Grid>
+                                    <local:ImageViewerControl ImageSize="{Binding Size}" PhotoUrl="{Binding PhotoUrl}" Buid="{Binding Buid}" ObjectId="{Binding PhotoId}" />
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate x:Key="Video">
+                                <Grid Background="Transparent" Tap="Video_Tapped">
+                                    <local:ImoImage
+                                            Url="{Binding ThumbnailUrl}" Stretch="Uniform"/>
+                                    <local:IconCircleButton x:Name="playButton" IconName="PlayButton" Width="100" Height="100"
+                                                            Opacity="0.8"
+                                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                            Background="#0277BD"/>
+                                </Grid>
+                            </DataTemplate>
+                        </selectors:EnumTemplateSelector.Templates>
+                    </selectors:EnumTemplateSelector>
+                </DataTemplate>
+            </imo:FlipView.ItemTemplate>
+        </imo:FlipView>
+    </Grid>
+</local:ImoPage>

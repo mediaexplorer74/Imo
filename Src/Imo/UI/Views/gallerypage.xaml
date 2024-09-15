@@ -1,0 +1,75 @@
+<local:ImoPage
+    x:Class="ImoSilverlightApp.UI.Views.GalleryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:imo="clr-namespace:Imo.Phone.Controls"
+    xmlns:local="clr-namespace:ImoSilverlightApp.UI.Views"
+    xmlns:convert="clr-namespace:ImoSilverlightApp.Converters"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="rootGalleryPage"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="White"
+    shell:SystemTray.ForegroundColor="Black">
+
+    <local:ImoPage.Resources>
+        <convert:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <convert:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
+        <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <convert:ScaleDoubleConverter x:Key="ScaleConverter" Scale="0.33" />
+    </local:ImoPage.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="15 0 0 10">
+            <TextBlock Text="{Binding Contact.Alias}" Foreground="Black" FontSize="32"/>
+            <TextBlock Text="Media Gallery" Foreground="{StaticResource ForegroundLighterBrush}" FontSize="15"/>
+        </StackPanel>
+
+        <imo:LongListSelector Grid.Row="1"
+                              IsFlatList="True"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ItemsSource="{Binding PhotoRows}" Padding="0 0 5 5">
+            <imo:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding Photos}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Tap="Photo_Tapped" Background="Transparent"
+                                          Width="{Binding ItemSize, ElementName=rootGalleryPage}"
+                                          Height="{Binding ItemSize, ElementName=rootGalleryPage}">
+                                    <Border BorderThickness="1" BorderBrush="{StaticResource UIElementBorderBrush}"
+                                                Margin="5 5 0 0">
+                                        <local:ImoImage EnableBusyIndicator="True" Stretch="UniformToFill" Url="{Binding ThumbnailUrl}" />
+                                    </Border>
+                                    <local:IconCircle x:Name="playButton" IconName="PlayButton" Width="64" Height="64"
+                                                          Opacity="0.8"
+                                                          Visibility="{Binding IsVideo, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                          Foreground="White"
+                                                          Background="#0277BD"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </imo:LongListSelector.ItemTemplate>
+        </imo:LongListSelector>
+    </Grid>
+</local:ImoPage>
